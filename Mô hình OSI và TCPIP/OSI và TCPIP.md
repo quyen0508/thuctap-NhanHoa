@@ -71,3 +71,7 @@
 - Đóng vai trò cho các ứng dụng liên lạc giữa các node trong mạng
 
 ## Mối tương quan giữa hai mô hình
+| Tiêu chí | OSI | TCP/IP |
+| - | - | - |
+| Số tầng | 7 | 4 |
+| Cách tiếp cận | Theo chiều dọc | Theo chiều ngàng |
