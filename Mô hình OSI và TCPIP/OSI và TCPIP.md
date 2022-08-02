@@ -75,3 +75,4 @@
 | - | - | - |
 | Số tầng | 7 | 4 |
 | Cách tiếp cận | Theo chiều dọc | Theo chiều ngàng |
+| Kiểu giao thức | Độc lập | Phụ thuộc |
