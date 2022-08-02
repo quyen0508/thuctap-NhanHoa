@@ -1,4 +1,4 @@
-# Dịch vụ DNS
+# Giao thức DNS
 ### Giới thiệu chung
 DNS viết tắt của Domain Name  System là hệ thống phân giải tên miền được phát minh vào năm 1984 nhằm mục đích chính là phân giải tên miền thành địa chỉ IP
 ### Phân loại máy chủ
