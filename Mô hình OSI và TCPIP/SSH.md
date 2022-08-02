@@ -29,3 +29,12 @@ SFTP là giao thức phổ biến trong việc bảo mật truyền file đượ
 - ```scp```: client truyền file với giao diện dòng lệnh giống với RCP
 - ```sftp```: client truyền file với giao diện dòng lệnh giống với FTP
 - ```sshd```: OpenSSH server
+
+### So sánh SSH với Telnet
+| Tiêu chí | SSH | Telnet |
+| - | - | - |
+| Hoạt động trên port | 22 | 23 |
+} Mức độ bảo mật | An toàn | Kém an toàn |
+| Cơ chế mã hóa | Sử dụng Public Key | Truyền văn bản đơn thuần |
+| Hệ thống phù hợp | Public Network | Private Network |
+| Hệ điều hành tương thích | Tất cả hệ điều hành | Windows và Linux |
