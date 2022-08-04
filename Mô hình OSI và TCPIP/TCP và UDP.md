@@ -28,6 +28,9 @@
 - Bước 3: Sau khi kết nối đã được thiết lập thì A gửi lại gói tin để đáp ứng nhu cầu của B. ACK = 301 dùng để báo là đã nhận được gói tin có SEQ = 300
 - Sau khi 3 bước được hoàn tất, kết nối TCP được thiết lập giữa host A và B, lúc này hai host đã có thể truyền dữ liệu được cho nhau
 
+### Ứng dụng của TCP
+Dùng cho các mục đích cần độ bảo toàn của dữ liệu hơn là tốc độ truyền dữ liệu, ví dụ như truyền file (FTP), Telnet, HTML, gửi và nhận thư (SMTP, POP, IMAP)
+
 ## UDP
 ### Sơ lược về giao thức
 - UDP viết tắt của User Datagram Protocol là giao thức truyền tải hướng phi kết nối vì không đòi hỏi bên gửi và bên nhận phải liên kết trước khi trao đổi dữ liệu
@@ -50,16 +53,24 @@
 ### Cách thức hoạt động
 - UDP hoạt động tương tự như TCP nhưng nó không cung cấp kiểm tra lỗi khi truyền gói tin
 
+### Ứng dụng của UDP
+Dùng cho các mục đích cần tốc độ truyền nhanh mà không quan tâm tới việc mất gói tin, ví dụ như: DNS, DHCP, audio/video call, gaming,...
+
 ## So sánh TCP và UDP
 ### Điểm chung
 Đều là các giao thức mạng TCP/IP, có chức năng kết nối và gửi nhận dữ liệu giữa các thiết bị mạng với nhau
 ### Điểm khác
-| TCP | UDP |
-| - | - |
-| Hướng kết nối | Hướng không kết nối |
-| Độ tin cậy cao | Độ tin cậy thấp |
-| Gửi dữ liệu dạng luồng byte | Gửi đi Datagram |
-| Không cho phép mất gói tin | Cho phép mất gói tin |
-| Đảm bảo việc truyền dữ liệu | Không đảm bảo việc truyền dữ liệu |
-| Có sắp xếp thứ tự các gói tin | Không sắp xếp thứ tự các gói tin |
-| Tốc độ truyền thấp hơn UDP | Tốc độ truyền cao |
+| Tiêu chí | TCP | UDP |
+| - | - | - |
+| Ý nghĩa | TCP thiết lập kết nối giữa các máy tính trước khi truyền dữ liệu | UDP gửi dữ liệu trực tiếp tới máy đích mà không cần kiểm tra xem hệ thống đã sẵn sàng để nhận hay chưa |
+| Viết tắt của | Transmission Control Protocol | User Datagram Protocol |
+| Kiểu kết nối | Hướng kết nối | Hướng không kết nối |
+| Tốc độ | Thấp | Cao |
+| Độ tin cậy | Cao | Thấp |
+| Kích thước của Header | 20 Bytes | 8 Bytes |
+| Đảm bảo dữ liệu | Đảm bảo dữ liệu khi có khả năng gửi lại gói tin nếu được yêu cầu | Không đảm bảo dữ liệu |
+| Giao diện dữ liệu tới ứng dụng | Dựa trên stream | Dựa trên message |
+| Chức năng quản lý luồng dữ liệu | Sử dụng giao thức cửa sổ trượt (sliding window protocol) | Không có |
+| Phù hợp với lượng dữ liệu | Từ nhỏ cho đến trung bình | Từ nhỏ cho đến lớn |
+| Mục đích | Dùng cho các ứng dụng yêu cầu truyền dữ liệu ổn định | Dùng cho các ứng dụng yêu cầu truyền dữ liệu tốc độ cao |
+| Ứng dụng của giao thức | FTP, Telnet, SMTP, IMAP. POP,... | DNS, BOOTP, DHCP, TFTP,... |
