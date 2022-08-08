@@ -35,3 +35,21 @@
 ![image](./image/Install/Windows%2016.png)
 
 ##### Cài đặt hệ điều hành
+- Lựa chọn ngôn ngữ:
+![image](./image/Install/Windows%2017.png)
+- Chọn phiên bản hệ điều hành:
+![image](./image/Install/Windows%2018.png)
+- Chấp nhận điều khoản:
+![image](./image/Install/Windows%2019.png)
+- Chọn "Custom: Install Windows only (advanced)" để cài đặt mới cho hệ điều hành:
+![image](./image/Install/Windows%2020.png)
+- Chọn ổ đĩa chứa hệ điều hành:
+![image](./image/Install/Windows%2021.png)
+- Đặt mật khẩu cho tải khoản quản trị:
+![image](./image/Install/Windows%2022.png)
+- Giao diện đăng nhập:
+![image](./image/Install/Windows%2023.png)
+- Giao diện sau khi đăng nhập:
+![image](./image/Install/Windows%2024.png)
+- Đặt Snapshot cho máy ảo:
+![image](./image/Install/Windows%2025.png)
