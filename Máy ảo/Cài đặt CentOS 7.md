@@ -25,7 +25,7 @@
 ![image](./image/Install/CentOS%2011.png)
 - Đặt kích thước cho ổ đĩa và cách lưu file:
 ![image](./image/Install/CentOS%2012.png)
-- Tên ổ đĩa:
+- Đặt tên ổ đĩa:
 ![image](./image/Install/CentOS%2013.png)
 - Review các cài đặt:
 ![image](./image/Install/CentOS%2014.png)
