@@ -1,6 +1,6 @@
 # Cài đặt CentOS 7 trên nền VMWare Workstation Pro 16
 ### Các bước cài đặt
-##### Khởi tạo một máy ảo mới
+##### Khởi tạo máy ảo
 - Lựa chọn hình thức cấu hình:
 ![image](./image/Install/CentOS%201.png)
 - Chọn phiên bản tương thích của phần cứng máy ảo:
