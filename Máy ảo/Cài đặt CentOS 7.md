@@ -55,5 +55,5 @@
 ![image](./image/Install/CentOS%2025.png)
 - Giao diện màn hình chính:
 ![image](./image/Install/CentOS%2026.png)
-- Đặt snap shot cho máy ảo:
+- Đặt Snapshot cho máy ảo:
 ![image](./image/Install/CentOS%2027.png)
