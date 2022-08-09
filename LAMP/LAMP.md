@@ -1,0 +1,105 @@
+# LAMP
+### Giới thiệu về LAMP
+LAMP là một bộ ứng dụng và hệ điều hành tạo môi trường webserver viết tắt của L - Linux, A - Apache, M - MySQL và P - PHP/Python/Perl
+
+### Các thành phần của LAMP
+- Linux: Là hệ điều hành làm cơ sở nền tảng cho các phần mềm khác chạy trên nó
+- Apache: Là phần mềm web server
+- MySQL: Là phần mềm cung cấp cơ sở dữ liệu giúp lưu trữ thông tin về website
+- PHP/Python/Perl:
+    - PHP: ngôn ngữ lập trình trang web
+    - Python: là ngôn ngữ lập trình bậc cao, có cấu trúc rõ ràng, dễ tiếp cận
+
+### Cài đặt các thành phần của LAMP
+Cài đặt Apache, MySQL và PHP trên CentOS 7
+##### Cài đặt Apache
+Đã thực hiện tại tài liệu Webserver trên CentOS 7 (https://github.com/quyen0508/thuctap-NhanHoa/blob/main/Webserver/Webserver%20tr%C3%AAn%20CentOS%207.md)
+Tạo một trang web VirtualHost có địa chỉ www.qnx.com có đường dẫn chứa file index.html là /var/www/qnx/
+##### Cài MySQL
+- Sử dụng MariaDB để thay thế của MySQL
+- Sử dụng lệnh
+```sh
+yum install mariadb-server mariadb -y
+```
+để cài đặt MariaDB
+- Khởi chạy dịch vụ cho ứng dụng
+```sh
+systemctl start mariadb
+```
+- Bảo mật MariaDB bằng dòng lệnh
+```sh
+mysql_secure_installation
+```
+- Tiếp tục làm theo hướng dẫn để đặt mật khẩu bảo vệ, cân nhắc loại bỏ người dùng ẩn danh, không cho phép đăng nhập từ xa và bỏ cơ sở dữ liệu test
+
+##### Cài PHP
+- Cài đặt epel-release bằng lệnh
+```sh
+yum -y install epel-release
+```
+- Thêm remi repo
+```sh
+rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+```
+- Dùng lệnh ```yum update``` để lấy danh sách gói phần mềm
+- Cài đặt PHP 7.3
+```sh
+yum-config-manager --enable remi-php73
+yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysqlnd
+```
+- Tạo file info.php tại đường dẫn /var/www/html/ có nội dung
+```<?php phpinfo(); ?>```
+- Kết quả trang web truy cập tại máy ảo Windows 10 Pro bằng địa chỉ 192.168.14.128/info.php
+![image](./image/LAMP%201.png)
+
+### Cài đặt Word Press
+##### Tạo cơ sở dữ liệu trong MySQL
+- Đăng nhập vào mysql bằng lệnh
+```sh
+mysql -u root -p
+```
+- Tạo cơ sở dữ liệu wordpress
+```sh
+CREATE DATABASE wordpress;
+```
+- Tạo người dùng mới
+```sh
+CREATE USER quyennx@localhost IDENTIFIED BY 'qnx';
+```
+- Cấp quyền cơ sở dữ liệu cho người dùng vừa tạo
+```sh
+GRANT ALL PRIVILEGES ON wordpress.* TO quyennx@localhost IDENTIFIED BY 'qnx';
+```
+- Cập nhật lại quyền và thoát
+```sh
+FLUSH PRIVILEGES;
+exit
+```
+- Cài đặt ```wget`` nếu chưa có
+```sh
+yum install wget
+```
+- Tải xuống file cài wordpress
+```sh
+wget http://wordpress.org/latest.tar.gz
+```
+- Giải nén file cài
+```sh
+tar -xzvf latest.tar.gz
+```
+- Copy file trong thư mục wordpress vào thư mục /etc/www/qnx
+```sh
+rsync -avP ~/wordpress/ /var/www/qnx/
+```
+- Cấp quyền apache cho thư mục wordpress
+```sh
+chown -R apache:apache /var/www/qnx/*
+```
+- Tạo một file cấu hình từ file cấu hình mẫu
+```sh
+cp wp-config-sample.php wp-config.php
+```
+- Chỉnh sửa file cấu hình
+```sh
+vi wp-config.php
+```
