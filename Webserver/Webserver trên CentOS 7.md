@@ -67,3 +67,18 @@ Tạo các file cấu hình của các VirtualHost trong thư mục /etc/httpd/s
 ln -s /etc/httpd/sites-available/web1.conf /etc/httpd/sites-enabled/web1.conf
 ln -s /etc/httpd/sites-available/web2.conf /etc/httpd/sites-enabled/web2.conf
 ```
+Khởi động lại dịch vụ httpd để cập nhật cấu hình bằng lệnh
+```sh
+systemctl restart httpd
+```
+
+### Kết quả thực hiện
+- Dùng máy ảo chạy Windows 10 Pro để truy cập các trang web trên
+- Trước tiên phải sửa file host trỏ các trang web trên vào địa chỉ của máy ảo chạy CentOS 7:
+![image](./image/CentOS%2010.png)
+- Trang web chính:
+![image](./image/CentOS%207.png)
+- Trang web VirtualHost 1:
+![image](./image/CentOS%208.png)
+- Trang web VirtualHost 2:
+![image](./image/CentOS%209.png)
