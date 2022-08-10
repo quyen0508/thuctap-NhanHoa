@@ -14,7 +14,7 @@ LAMP là một bộ ứng dụng và hệ điều hành tạo môi trường web
 Cài đặt Apache, MySQL và PHP trên CentOS 7
 ##### Cài đặt Apache
 Đã thực hiện tại tài liệu Webserver trên CentOS 7 (https://github.com/quyen0508/thuctap-NhanHoa/blob/main/Webserver/Webserver%20tr%C3%AAn%20CentOS%207.md)
-Tạo một trang web VirtualHost có địa chỉ www.qnx.com có đường dẫn chứa file index.html là /var/www/qnx/
+Tạo một trang web VirtualHost có địa chỉ www.quyennx.com có đường dẫn chứa file index.html là /var/www/html/
 ##### Cài MySQL
 - Sử dụng MariaDB để thay thế của MySQL
 - Sử dụng lệnh
@@ -52,7 +52,7 @@ yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-my
 - Kết quả trang web truy cập tại máy ảo Windows 10 Pro bằng địa chỉ 192.168.14.128/info.php
 ![image](./image/LAMP%201.png)
 
-### Cài đặt Word Press
+### Cài đặt WordPress
 ##### Tạo cơ sở dữ liệu trong MySQL
 - Đăng nhập vào mysql bằng lệnh
 ```sh
@@ -64,11 +64,11 @@ CREATE DATABASE wordpress;
 ```
 - Tạo người dùng mới
 ```sh
-CREATE USER quyennx@localhost IDENTIFIED BY 'qnx';
+CREATE USER quyennx@localhost IDENTIFIED BY '123456';
 ```
 - Cấp quyền cơ sở dữ liệu cho người dùng vừa tạo
 ```sh
-GRANT ALL PRIVILEGES ON wordpress.* TO quyennx@localhost IDENTIFIED BY 'qnx';
+GRANT ALL PRIVILEGES ON wordpress.* TO quyennx@localhost IDENTIFIED BY '123456';
 ```
 - Cập nhật lại quyền và thoát
 ```sh
@@ -87,13 +87,13 @@ wget http://wordpress.org/latest.tar.gz
 ```sh
 tar -xzvf latest.tar.gz
 ```
-- Copy file trong thư mục wordpress vào thư mục /etc/www/qnx
+- Copy file trong thư mục wordpress vào thư mục /etc/www/html
 ```sh
-rsync -avP ~/wordpress/ /var/www/qnx/
+rsync -avP ~/wordpress/ /var/www/html/
 ```
 - Cấp quyền apache cho thư mục wordpress
 ```sh
-chown -R apache:apache /var/www/qnx/*
+chown -R apache:apache /var/www/html/*
 ```
 - Tạo một file cấu hình từ file cấu hình mẫu
 ```sh
@@ -103,3 +103,20 @@ cp wp-config-sample.php wp-config.php
 ```sh
 vi wp-config.php
 ```
+Cấu hình tên cơ sở dữ liệu, tên người dùng và mật khẩu đã thiết lập trước đó
+![image](./image/LAMP%202.png)
+- Khởi động lại dịch vụ ```httpd```
+```sh
+systemctl reload httpd
+```
+
+##### Cấu hình WordPress bằng trình duyệt
+- Sử dụng máy ảo Windows 10 Pro truy cập trang web http://www.qnx.com/wp-admin/install.php
+- Cài đặt ngôn ngữ
+![image](./image/LAMP%203.png)
+- Cài đặt các thông tin
+![image](./image/LAMP%204.png)
+- Đăng nhập vào trang quản lý
+![image](./image/LAMP%205.png)
+- Giao diện trang quản trị WordPress
+![image](./image/LAMP%206.png)
