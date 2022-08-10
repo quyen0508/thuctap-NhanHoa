@@ -96,7 +96,7 @@ systemctl restart nginx
 Tham khảo tại [LAMP - Cài đặt MySQL](https://github.com/quyen0508/thuctap-NhanHoa/blob/main/LAMP/LAMP.md#c%C3%A0i-%C4%91%E1%BA%B7t-mysql)
 
 ##### Cài đặt PHP
-Tham khảo tại [LAMP - Cài đặt PHP](https://github.com/quyen0508/thuctap-NhanHoa/blob/main/LAMP/LAMP.md#c%C3%A0i-%C4%91%E1%BA%B7t-php)
+
 
 ### Cài đặt WordPress
 Tham khảo tại [LAMP - Cài đặt WordPress](https://github.com/quyen0508/thuctap-NhanHoa/blob/main/LAMP/LAMP.md#c%C3%A0i-%C4%91%E1%BA%B7t-wordpress)
