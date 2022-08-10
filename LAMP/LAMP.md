@@ -13,7 +13,10 @@ LAMP là một bộ ứng dụng và hệ điều hành tạo môi trường web
 ### Cài đặt các thành phần của LAMP
 Cài đặt Apache, MySQL và PHP trên CentOS 7
 ##### Cài đặt Apache
-Đã thực hiện tại tài liệu Webserver trên CentOS 7 (https://github.com/quyen0508/thuctap-NhanHoa/blob/main/Webserver/Webserver%20tr%C3%AAn%20CentOS%207.md)
+Tham khảo tại tài liệu Webserver trên CentOS 7
+```sh
+https://github.com/quyen0508/thuctap-NhanHoa/blob/main/Webserver/Webserver%20tr%C3%AAn%20CentOS%207.md
+```
 Tạo một trang web VirtualHost có địa chỉ www.quyennx.com có đường dẫn chứa file index.html là /var/www/html/
 ##### Cài đặt MySQL
 - Sử dụng MariaDB để thay thế của MySQL
