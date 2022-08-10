@@ -15,7 +15,7 @@ Cài đặt Apache, MySQL và PHP trên CentOS 7
 ##### Cài đặt Apache
 Đã thực hiện tại tài liệu Webserver trên CentOS 7 (https://github.com/quyen0508/thuctap-NhanHoa/blob/main/Webserver/Webserver%20tr%C3%AAn%20CentOS%207.md)
 Tạo một trang web VirtualHost có địa chỉ www.quyennx.com có đường dẫn chứa file index.html là /var/www/html/
-##### Cài MySQL
+##### Cài đặt MySQL
 - Sử dụng MariaDB để thay thế của MySQL
 - Sử dụng lệnh
 ```sh
@@ -32,7 +32,7 @@ mysql_secure_installation
 ```
 - Tiếp tục làm theo hướng dẫn để đặt mật khẩu bảo vệ, cân nhắc loại bỏ người dùng ẩn danh, không cho phép đăng nhập từ xa và bỏ cơ sở dữ liệu test
 
-##### Cài PHP
+##### Cài đặt PHP
 - Cài đặt epel-release bằng lệnh
 ```sh
 yum -y install epel-release
@@ -111,7 +111,7 @@ systemctl reload httpd
 ```
 
 ##### Cấu hình WordPress bằng trình duyệt
-- Sử dụng máy ảo Windows 10 Pro truy cập trang web http://www.qnx.com/wp-admin/install.php
+- Sử dụng máy ảo Windows 10 Pro truy cập trang web http://www.quyennx.com/wp-admin/install.php
 - Cài đặt ngôn ngữ
 ![image](./image/LAMP%203.png)
 - Cài đặt các thông tin
