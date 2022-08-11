@@ -28,6 +28,7 @@ yum install mariadb-server mariadb -y
 - Khởi chạy dịch vụ cho ứng dụng
 ```sh
 systemctl start mariadb
+systemctl enable mariadb
 ```
 - Bảo mật MariaDB bằng dòng lệnh
 ```sh
@@ -48,7 +49,7 @@ rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 - Cài đặt PHP 7.3
 ```sh
 yum-config-manager --enable remi-php73
-yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysqlnd
+yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysqlnd php-mysql php-xml php-soap php-xmlrpc php-mbstring php-json
 ```
 - Tạo file info.php tại đường dẫn /var/www/html/ có nội dung
 ```<?php phpinfo(); ?>```
