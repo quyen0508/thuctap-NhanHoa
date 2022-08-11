@@ -61,7 +61,7 @@ server {
 ```
 ![image](./image/LEMP%203.png)
 ```sh
-erver {
+server {
       listen 80;
       server_name quyenweb2.xyz www.quyenweb2.xyz;
       location / {
@@ -96,7 +96,65 @@ systemctl restart nginx
 Tham khảo tại [LAMP - Cài đặt MySQL](https://github.com/quyen0508/thuctap-NhanHoa/blob/main/LAMP/LAMP.md#c%C3%A0i-%C4%91%E1%BA%B7t-mysql)
 
 ##### Cài đặt PHP
+- Cài đặt epel-release bằng lệnh
+```sh
+yum -y install epel-release
+```
+- Thêm remi repo
+```sh
+rpm -Uvh http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+```
+- Dùng lệnh ```yum update``` để lấy danh sách gói phần mềm
+- Cài đặt PHP 7.3
+```sh
+yum-config-manager --enable remi-php73
+yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-mysqlnd php-mysql php-xml php-soap php-xmlrpc php-mbstring php-json php-fpm
+```
+- Tạo file index.php tại đường dẫn /var/www/html/ có nội dung
+```<?php phpinfo(); ?>```
 
+- Tạo file cấu hình VirtualHost cho PHP là phpweb.conf tại đường dẫn có nội dung
+```sh
+server {
+        listen   80;
+
+        root /var/www/html;
+        index index.php index.html index.htm;
+        server_name  xqn.com www.xqn.com;
+
+        location / {
+                try_files $uri $uri/ /index.html;
+        }
+
+	error_page 404 /404.html;
+        error_page 500 502 503 504 /50x.html;
+        location = /50x.html {
+              root /usr/share/nginx/www;
+        }
+
+	location ~ .php$ {
+                try_files $uri =404;
+                fastcgi_pass 127.0.0.1:9000;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+        }
+}
+```
+
+- Tạo đường dẫn file sang thư mục sites-enabled để kích hoạt trang web
+```sh
+ln -s /etc/nginx/sites-available/phpweb.conf /etc/nginx/sites-enabled/phpweb.conf
+```
+
+- Khởi động lại các dịch vụ
+```sh
+systemctl restart nginx
+systemctl restart php-fpm
+```
+
+- Kiểm tra kết quả bằng cách truy cập vào trang web www.xqn.com
+![image](./image/LEMP%209.png)
 
 ### Cài đặt WordPress
 Tham khảo tại [LAMP - Cài đặt WordPress](https://github.com/quyen0508/thuctap-NhanHoa/blob/main/LAMP/LAMP.md#c%C3%A0i-%C4%91%E1%BA%B7t-wordpress)
