@@ -5,7 +5,7 @@ LAMP là một bộ ứng dụng và hệ điều hành tạo môi trường web
 ### Các thành phần của LAMP
 - Linux: Là hệ điều hành làm cơ sở nền tảng cho các phần mềm khác chạy trên nó
 - Apache: Là phần mềm web server
-- MySQL: Là phần mềm cung cấp cơ sở dữ liệu giúp lưu trữ thông tin về website
+- MySQL: Là hệ quản trị cơ sở dữ liệu giúp lưu trữ thông tin về website
 - PHP/Python/Perl:
     - PHP: ngôn ngữ lập trình trang web
     - Python: là ngôn ngữ lập trình bậc cao, có cấu trúc rõ ràng, dễ tiếp cận
