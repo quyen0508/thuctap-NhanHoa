@@ -16,10 +16,12 @@ yum -y install httpd
 
 ### Cấu hình file /etc/httpd/conf/httpd.conf
 Đặt tên trang web tại dòng 95
+
 ![image](./image/CentOS%201.png)
 
 ### Tạo file index.html trong thư mục /var/www/html
 Nội dung trang web:
+
 ![image](./image/CentOS%202.png)
 
 ### Khởi động lại Apache:
@@ -49,8 +51,10 @@ firewall-cmd --reload
 ### Cấu hình các VirtualHost
 Tạo các file index.html với mỗi trang web nằm trong các thư mục tương ứng VirtualHost tại /var/www/
 - Nội dung trang www.quyennxweb1.com:
+
 ![image](./image/CentOS%205.png)
 - Nội dung trang www.quyennxweb2.com:
+
 ![image](./image/CentOS%206.png)
 Thêm dòng
 ```sh
@@ -59,8 +63,10 @@ IncludeOptional sites-enabled/*.conf
 vào cuối file /etc/httpd/conf/httpd.conf để thêm cấu hình VirtualHost vào file cấu hình chính của httpd
 Tạo các file cấu hình của các VirtualHost trong thư mục /etc/httpd/sites-available:
 - Cấu hình trang web www.quyennxweb1.com
+
 ![image](./image/CentOS%203.png)
 - Cấu hình trang web www.quyennxweb2.com
+
 ![image](./image/CentOS%204.png)
 Để kích hoạt các VirtualHost, tạo lối tắt các file cấu hình VirtualHost từ thư mục /etc/httpd/sites-available sang /etc/httpd/sites-enabled bằng lệnh:
 ```sh
@@ -75,10 +81,14 @@ systemctl restart httpd
 ### Kết quả thực hiện
 - Dùng máy ảo chạy Windows 10 Pro để truy cập các trang web trên
 - Trước tiên phải sửa file host trỏ các trang web trên vào địa chỉ của máy ảo chạy CentOS 7:
+
 ![image](./image/CentOS%2010.png)
 - Trang web chính:
+
 ![image](./image/CentOS%207.png)
 - Trang web VirtualHost 1:
+
 ![image](./image/CentOS%208.png)
 - Trang web VirtualHost 2:
+
 ![image](./image/CentOS%209.png)
