@@ -7,6 +7,7 @@ SSL hiện đang là tiêu chuẩn bảo mật cung cấp cho hàng triệu webs
 ![image](https://nhanhoa.com/templates/images/ssl/1.png)
 
 ### Cách thức hoạt động
+
 ![image](https://nhanhoa.com/templates/images/ssl/2.jpg)
 
 ### Một số thuật ngữ
