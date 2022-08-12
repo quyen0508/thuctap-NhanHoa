@@ -21,37 +21,47 @@ DNS viết tắt của Domain Name  System là hệ thống phân giải tên mi
 
 ### Các bản ghi của DNS
 ##### Bản ghi SOA
-Dùng để chỉ ra máy chủ Name Server là nơi cung cấp thông tin tin cậy từ dữ liệu có trong Zone
+Dùng để chỉ ra máy chủ Name Server là nơi cung cấp thông tin tin cậy từ dữ liệu có trong Zone. Tất cả các DNS Zone đều cần một bản ghi SOA để tuân theo tiêu chuẩn của IETF, các bản ghi SOA cũng rất quan trọng trong việc chuyển vùng Zone
 Cú pháp:
 ```[tiên-miền] IN SOA [tên-server-dns] [địa-chỉ-email] (serial number;refresh number;retry number;expire number;TTL number)```
+Chuyển vùng Zone: là quá trình gửi dữ liệu bản ghi DNS từ Name Server chính đến Name Server phụ
+
 ##### Bản ghi NS
-Chức năng: chỉ ra các máy chủ DNS quản lý tên miền của hệ thống
+Chức năng: chỉ ra các máy chủ DNS quản lý tên miền của hệ thống. Một tên miền thường có nhiều bản ghi NS để chỉ ra các server đích danh chính và dự phòng cho tên miền đó. Nếu không cấu hình đúng bản ghi NS thì sẽ không thể tải trang web khi sử dụng bằng tên miền
 Cú pháp: ```[tên miền] IN NS [tên-server-dns]```
 Ví dụ:
 - ```ktht.nuce.edu.vn IN NS server1.ktht.nuce.edu.vn```
 - ```ktht.nuce.edu.vn IN NS server2.ktht.nuce.edu.vn```
 
 ##### Bản ghi A
-Chức năng: dùng để ánh xạ tên máy thành địa chỉ IP
+Chức năng: 
+- Dùng để ánh xạ tên máy hoặc tên miền thành địa chỉ IPv4
+- Vận hành danh sách danh sách lỗ hổng bảo mật dựa trên hệ thống tên miền DNSBL. DNSBL có thể giúp máy chủ email xác định và chặn mail từ các tên miền gửi mail rác đã biết
+
 Cú pháp: ```[tên-máy-tính] IN A [địa-chỉ-IP]```
 Ví dụ:
 - ```server1 IN A 10.0.0.1```
 - ```server2 IN A 10.0.0.2```
 
+##### Bản ghi AAAA
+Chức năng:
+- Dùng để ánh xạ tên máy hoặc tên miền thành địa chỉ IPv6
+- Một tên miền có thể có một hoặc nhiều địa chỉ IPv4 và các bản ghi A đi kèm nhưng không phải tất cả đều có địa chỉ IPv6 và các thiết bị của người dùng đều được cấu hình IPv6
+
 ##### Bản ghi CNAME
-Chức năng: dùng để tạo tên gọi khác (bí danh) khác cho một máy chủ
+Chức năng: dùng để tạo tên gọi khác (bí danh) khác cho một máy chủ hoặc tên miền. Bản ghi này luôn luôn trỏ tới một tên miền, không bao giờ trỏ tới địa chỉ IP
 Cú pháp: ```[tên-bí-danh] IN CNAME [địa-chỉ-IP]```
 Ví dụ:
 ```www IN CNAME 10.0.0.1```
 
 ##### Bản ghi PTR
-Chức năng: dùng để ánh xạ đại chỉ IP thành tên máy
+Chức năng: dùng để ánh xạ đại chỉ IP thành tên máy (ngược lại với bản ghi A và AAAA)
 Cú pháp: ```[địa-chỉ-IP] IN PTR [tên-máy-tính]```
 Ví dụ:
 ```10.0.0.1 IN PTR server1.ktht.nuce.edu.vn```
 
 ##### Bản ghi MX
-Chức năng: dùng trong việc chuyển mail
+Chức năng: dùng trong việc chuyển hướng tới mail server. Bản ghi này chp biết cách gửi mail theo SMTP
 Cú pháp: ```[tên-miền] IN MX [thứ-tự-ưu-tiên] [tên-máy-chủ-mail]
 Ví dụ:
 - ```ktht.nuce.edu.vn IN MX 1 server1.ktht.nuce.edu.vn```
