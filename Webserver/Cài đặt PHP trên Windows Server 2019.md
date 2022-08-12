@@ -16,25 +16,36 @@ https://sourceforge.net/projects/wincache/files/
 
 ### Cấu hình để PHP
 - Để sử dụng PHP cần cấu hình biến hệ thống (Environment Variables) bằng cách tìm kiếm "Edit the system enviroment variables"
+
 ![image](./image/PHP%201.png)
 - Nhấn đúp chuột vào Path để vào mục thay đổi biến hệ thống
+
 ![image](./image/PHP%202.png)
 - Chọn New và nhập đường dẫn chứa PHP ("C:\PHP") rồi nhấn Ok các hộp thoại để lưu cấu hình
+
 ![image](./image/PHP%203.png)
 - Kiểm tra bằng cách mở Command Prompt và chạy lệnh ```php -v```
+
 ![image](./image/PHP%204.png)
 - Truy cập trang quản lý IIS Manager chọn tên máy tính ở khu vực panel bên trái
+
 ![image](./image/PHP%205.png)
 - Chọn Handler Mappings
+
 ![image](./image/PHP%206.png)
 - Chọn Add Module Mapping và nhập các thông tin
+
 ![image](./image/PHP%207.png)
+
 ![image](./image/PHP%208.png)
 - Nếu báo chưa có CgiModule, cài đặt CGI thông qua tính năng Add roles and features của Windows Server
+
 ![image](./image/PHP%209.png)
 - Quay trở về màn hình Home và chọn Default Documents
+
 ![image](./image/PHP%2010.png)
 - Thêm Default.php và index.php vào danh sách
+
 ![image](./image/PHP%2011.png)
 - Trở lại thư mục C:\PHP sửa tên file php.ini-production thành php.ini và sửa nội dung trong file (sử dụng tính năng Find để thuận tiện trong việc tìm thông số cấu hình)
 ```sh
@@ -55,4 +66,5 @@ fastcgi.logging=0
 <?php phpinfo(); ?>
 ```
 - Kiểm tra kết quả
+
 ![image](./image/PHP%2012.png)
