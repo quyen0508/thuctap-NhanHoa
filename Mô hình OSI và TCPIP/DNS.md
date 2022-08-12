@@ -23,7 +23,15 @@ DNS viết tắt của Domain Name  System là hệ thống phân giải tên mi
 ##### Bản ghi SOA
 Dùng để chỉ ra máy chủ Name Server là nơi cung cấp thông tin tin cậy từ dữ liệu có trong Zone. Tất cả các DNS Zone đều cần một bản ghi SOA để tuân theo tiêu chuẩn của IETF, các bản ghi SOA cũng rất quan trọng trong việc chuyển vùng Zone
 Cú pháp:
-```[tiên-miền] IN SOA [tên-server-dns] [địa-chỉ-email] (serial number;refresh number;retry number;expire number;TTL number)```
+```sh
+[tiên-miền] IN SOA [tên-server-dns] [địa-chỉ-email] (
+    serial number;
+    refresh number;
+    retry number;
+    expire number;
+    TTL number
+)
+```
 Trong đó:
 - ```serial``` là số phiên bản của bản ghi SOA, khi số này thay đổi thì sẽ cảnh báo cho các server phụ rằng chúng nên cập nhật các bản sao của file zone thông qua chuyển vùng zone
 - ```refresh``` là khoảng thời gian tính bằng giây để server phụ phải đợi trước khi yêu cầu server chính cung cấp SOA record xem nó đã được cập nhật hay chưa
