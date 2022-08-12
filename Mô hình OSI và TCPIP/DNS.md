@@ -24,7 +24,7 @@ DNS viết tắt của Domain Name  System là hệ thống phân giải tên mi
 Dùng để chỉ ra máy chủ Name Server là nơi cung cấp thông tin tin cậy từ dữ liệu có trong Zone. Tất cả các DNS Zone đều cần một bản ghi SOA để tuân theo tiêu chuẩn của IETF, các bản ghi SOA cũng rất quan trọng trong việc chuyển vùng Zone
 Cú pháp:
 ```sh
-[tiên-miền] IN SOA [tên-server-dns] [địa-chỉ-email] (
+[tên-miền] IN SOA [tên-server-dns] [địa-chỉ-email] (
     serial number;
     refresh number;
     retry number;
