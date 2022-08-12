@@ -36,6 +36,7 @@ firewall-cmd --reload
 ```
 
 - Kết quả khi truy cập trang web trên trình duyệt
+
 ![image](./image/LEMP%201.png)
 
 ###### Sử dụng VirtualHost để tạo nhiều website
@@ -45,6 +46,7 @@ mkdir sites-available
 mkdir sites-enabled
 ```
 - Cấu hình file nginx.conf để nhận cấu hình của các trang trong sites-enabled bằng cách thêm ```include /etc/nginx/sites-enabled/*.conf;``` vào cuối file
+
 ![image](./image/LEMP%202.png)
 
 - Tạo file cấu hình cho virtualhost tại thư mục sites-available có nội dung
@@ -59,6 +61,7 @@ server {
       }
 }
 ```
+
 ![image](./image/LEMP%203.png)
 ```sh
 server {
@@ -71,10 +74,13 @@ server {
       }
 }
 ```
+
 ![image](./image/LEMP%204.png)
 
 - Tạo các file html trong thư mục mỗi trang web tại thư mục /var/www/
+
 ![image](./image/LEMP%205.png)
+
 ![image](./image/LEMP%206.png)
 
 - Tạo soft link cấu hình các trang web từ thư mục sites-available sang sites-enabled để kích hoạt các trang web
@@ -89,7 +95,9 @@ systemctl restart nginx
 ```
 
 - Kết quả truy cập bằng trình duyệt trên máy ảo Windows 10 Pro đã thêm địa chỉ trong file hosts
+
 ![image](./image/LEMP%207.png)
+
 ![image](./image/LEMP%208.png)
 
 ##### Cài đặt MySQL
@@ -154,6 +162,7 @@ systemctl restart php-fpm
 ```
 
 - Kiểm tra kết quả bằng cách truy cập vào trang web www.xqn.com
+
 ![image](./image/LEMP%209.png)
 
 ### Cài đặt WordPress
