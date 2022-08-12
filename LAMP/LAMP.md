@@ -54,6 +54,7 @@ yum install php php-common php-opcache php-mcrypt php-cli php-gd php-curl php-my
 - Tạo file info.php tại đường dẫn /var/www/html/ có nội dung
 ```<?php phpinfo(); ?>```
 - Kết quả trang web truy cập tại máy ảo Windows 10 Pro bằng địa chỉ 192.168.14.128/info.php
+
 ![image](./image/LAMP%201.png)
 
 ### Cài đặt WordPress
@@ -108,6 +109,7 @@ cp wp-config-sample.php wp-config.php
 vi wp-config.php
 ```
 Cấu hình tên cơ sở dữ liệu, tên người dùng và mật khẩu đã thiết lập trước đó
+
 ![image](./image/LAMP%202.png)
 - Khởi động lại dịch vụ ```httpd```
 ```sh
@@ -117,10 +119,14 @@ systemctl reload httpd
 ##### Cấu hình WordPress bằng trình duyệt
 - Sử dụng máy ảo Windows 10 Pro truy cập trang web http://www.quyennx.com/wp-admin/install.php
 - Cài đặt ngôn ngữ
+
 ![image](./image/LAMP%203.png)
 - Cài đặt các thông tin
+
 ![image](./image/LAMP%204.png)
 - Đăng nhập vào trang quản lý
+
 ![image](./image/LAMP%205.png)
 - Giao diện trang quản trị WordPress
+
 ![image](./image/LAMP%206.png)
