@@ -8,12 +8,12 @@ DNS viết tắt của Domain Name  System là hệ thống phân giải tên mi
 
 ### Cấu trúc của một tên miền
 - Gồm 4 phần:
-    - Root Domain
-    - Top-Level Domain
-    - Second-Level Domain
-    - Subdomain
+    - Root Domain: bao gồm một đấu chấm "." đứng cuối tên miền, thông thường khi sử dụng trình duyệt thì thành phần này thường được bỏ qua
+    - Top-Level Domain: dùng để xác định một nước, khu vực hoặc tổ chức, ví dụ như .com, .vn, .xyz, .org,...
+    - Second-Level Domain: dùng để xác định tên một công ty, một tổ chức hay một cá nhân
+    - Subdomain: thường dùng để xác định các chị nhánh, phòng ban của một cơ quan hay chủ đề nào đó
 - Ví dụ về tên miền ```ktht.nuce.edu.vn```:
-    - Root Domain: là phần sau phần ```vn```, bao gồm một đấu chấm ".", thông thường khi sử dụng trình duyệt thì thành phần này thường được bỏ qua
+    - Root Domain: là phần sau phần ```vn```
     - Top-Level Domain: ```vn```
     - Second-Level Domain: ```edu```
     - Subdomain: ```nuce```
