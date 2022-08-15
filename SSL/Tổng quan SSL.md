@@ -10,7 +10,7 @@ SSL hiện đang là tiêu chuẩn bảo mật cung cấp cho hàng triệu webs
 
 ![image](https://nhanhoa.com/templates/images/ssl/2.jpg)
 
-### Một số thuật ngữ
+### Phân loại SSL
 ##### Domain Validation (DV SSL)
 Chứng chỉ số SSL chứng thực cho Domain Name
 Khi một website sử dụng DV SSL thì sẽ được xác thực tên domain, website đã được mã hóa và an toàn khi trao đổi dữ liệu
@@ -33,6 +33,16 @@ Wildcard SSL lý tưởng cho các trang thương mai điện tử. Mỗi e-stor
 - _An toàn dữ liệu_: dữ liệu không bị thay đổi bởi hacker
 - _Bảo mật dữ liệu_: dữ liệu được mã hóa và chỉ người nhận đích thực mới có thể giải mã
 - _Chống chối bỏ_: đối tượng thực hiện gửi dữ liệu không thể phủ nhận dữ liệu của mình
+
+### Các phương pháp xác thực SSL
+##### Xác thực qua email
+- Người dùng nhận được mail gửi về địa chỉ email đăng ký chứng chỉ SSL. Nội dung mail chứa một đường dẫn tới trang xác thực và một mã xác thực dùng để nhập vào trang xác thực đó để chứng minh là chủ sở hữu của tên miền đó
+
+##### Xác thực bằng CNAME
+- Xác thực bằng phương pháp này yêu cầu nhập bản ghi CNAME được cung cấp trong DNS zone của tên miền. Quá trình này có thể mất từ 4 tới 8 tiếng để hoàn thành việc xác thực. Hệ thống sẽ kiểm tra sự hiện diện của bản ghi nằm trong DNS zone, nếu bản ghi được tìm thấy thì Domain control được xác thực và chứng chỉ sẽ được cấp
+
+##### Xác thực bằng HTTP
+- Phương pháp này sử dụng một tệp văn bản (text file) để xác thực. Người dùng sẽ phải upload text file lên server của chính họ vào một đường dẫn được định sẵn để chứng minh là chủ sở hữu của tên miền
 
 ### Các lợi ích của việc sử dụng SSL
 - Xác thực website, giao dịch
