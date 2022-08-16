@@ -27,6 +27,8 @@ Với ```-d [tên-miền]``` là mỗi tên miền được cấp chứng chỉ 
 - Cài đặt thành công, thông tin về chứng chỉ và khóa (fullchain.pem và privkey.pem) được lưu tại đường dẫn /etc/letsencrypt/live/quyennx.xyz/
 
 ##### Kiểm tra kết quả
+![image](./image/Certbot%201.png)
+![image](./image/Certbot%202.png)
 
 ##### Gia hạn tự động
 - Do chứng chỉ Let's Encrypt có thời hạn 90 ngày nên cần phải gia hạn lại thường xuyên
