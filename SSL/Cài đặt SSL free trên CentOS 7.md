@@ -8,7 +8,7 @@
 yum -y install epel=release
 ```
 
-- Cài đặt certbot-nginx bằng lệnh
+- Cài đặt certbot bằng lệnh
 
 ```sh
 yum -y install certbot python2-certbot-apache mod_ssl
