@@ -111,3 +111,56 @@ https://github.com/quyen0508/thuctap-NhanHoa/blob/main/SSL/C%C3%A0i%20%C4%91%E1%
 - Lựa chọn các tùy chọn phù hợp với người dùng bao gồm các tab như: Tài nguyên, Quyền hạn, Tham số lưu trữ, Các thiết lập PHP, Thư tin, DNS, Hiệu suất, Nhật ký & Thống kê, Ứng dụng, Các dịch vụ bổ sung
 
 ![image](./image/Plesk%2026.png)
+
+### Cài đặt tường lửa
+- Để cài đặt tường lửa, truy cập tab **Các công cụ & Các thiết lập** và chọn **Tường lửa** tại mục **Bảo mật**
+
+![image](./image/Plesk%2027.png)
+
+- Giao diện Quản lý Tường lửa
+
+![image](./image/Plesk%2028.png)
+
+- Chuyển sang tab **Các quy tắc tường lửa** để quản lý các quy tắc
+
+![image](./image/Plesk%2029.png)
+
+##### Thêm quy tắc tường lửa
+- Để thêm quy tắc mới, chọn **Thêm Quy tắc Tường lửa**
+
+- Nhập các thông tin thiết lập cho quy tắc rồi chọn **Đồng ý** để thêm mới quy tắc
+
+![image](./image/Plesk%2030.png)
+
+##### Chỉnh sửa quy tắc tường lửa
+- Để sửa các quy tắc đang có, chọn tên quy tắc cần sửa
+
+![image](./image/Plesk%2031.png)
+
+- Chỉnh sửa các thông tin của quy tắc và chọn **Đồng ý** để lưu chỉnh sửa
+
+![image](./image/Plesk%2032.png)
+
+##### Xóa quy tắc tường lửa
+- Để xóa quy tắc, bấm vào checkbox ở đầu mỗi dòng của quy tắc và chọn **Gỡ bỏ** ở phía trên
+
+![image](./image/Plesk%2033.png)
+
+### Dãy ứng dụng IIS chuyên dụng cho trang web (Dedicated IIS Application Pool for Website)
+- Truy cập vào tab **Tên miền**, chọn tên miền cần cài đặt, chuyển sang tab **Lưu trữ & DNS** và chọn **Dãy ứng dụng IIS chuyên dụng cho trang web** (hay **Dedicated IIS Application Pool for Website**)
+
+![image](./image/Plesk%2034.png)
+
+- Tìm hiểu các thông số cài đặt tại mục **Performance Settings**:
+    - The maximum number of worker processes (phục vụ các yêu cầu cho các trang web IIS): Số lượng tối đa các worker, mỗi worker có thể dùng để tạo nhiều tiến trình, thông thường chỉ cần 1 worker là đã có thể sử dụng hết tài nguyên CPU. Trường hợp có 2 worker trở lên, khi 1 woeker gặp vấn đề thì các worker còn lại đảm nhiệm nhiệm vụ của worker đó
+    - Idle timeout (minutes): Thời gian 1 tiến trình worker ở trạng thái chờ trước khi bị tắt
+    - Idle timeout action: Tác vụ được thực hiện sau khi worker hết thời gian chờ
+    - Maximum CPU usage(%): Tài nguyên CPU tối đa có thể được sử dụng tính theo (%) để giới hạn hiệu năng cho mỗi tên miền
+    - Limit action: Tác vụ hệ thống sẽ thực hiện khi worker sử dụng tối đa tài nguyên được cho phép
+    - Limit Interval (minutes): Khoảng thời gian đặt lại (reset) theo dõi tài nguyên CPU trên mỗi nhóm tên miền
+    - Recycling at regular time intervals (minutes): Khoảng thời gian để ứng dụng tên miền sẽ chạy lại chương trình từ đầu
+    - Recycling when the maximum number of requests is reached: Số lượng tối đa các yêu cầu trước khi ứng dụng tên miền được chạy lại chương trình từ đầu
+    - Recycling when the maximum number of virtual memory is used: Dung lượng bộ nhớ ảo tối đa được sử dụng trước khi ứng dụng tên miền được chạy lại chương trình từ đầu
+    - Recycling when the maximum amount of private memory is used: Dung lượng bộ nhớ riêng tối đa của mỗi worker có thể sử dụng trước khi ứng dụng tên miền được chạy lại từ đầu
+
+![image](./image/Plesk%2035.png)
