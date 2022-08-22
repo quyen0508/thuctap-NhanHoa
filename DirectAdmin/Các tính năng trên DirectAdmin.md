@@ -150,3 +150,102 @@ User được thiết lập dưới quyền cấp Reseller
 - Xóa thành công
 
 ![image](./image/DA%2025.png)
+
+### Chỉnh sửa source code tên miền của user
+- Source code của tên miền nằm trong thư mục public_html truy cập thông qua tab Files (FileManager)
+
+![image](./image/DA%2028.png)
+
+![image](./image/DA%2029.png)
+
+- Source code của tên miền là file index.html, để thay đổi source code, có 2 cách:
+
+##### Sửa trực tiếp file index.html thông qua trình chỉnh sửa trực tiếp trên DirectAdmin
+- Chọn **Edit** ở cột **Action** của file index.html để truy cập giao diện chỉnh sửa, nếu chưa có, tại tab **Filesystem Tools** ở mục **Create New File** đặt tên file là index.html rồi chọn **Create** để tạo file
+
+![image](./image/DA%2030.png)
+
+- Trong text box, chỉnh sửa nội dung trang web, chọn **Preview Html** để xem trước nội dung của trang trước khi lưu
+
+- Sau khi chỉnh sửa xong, chọn **Save As** để lưu file index.html
+
+![image](./image/DA%2031.png)
+
+- Kết quả hiển thị trên trang web
+
+![image](./image/DA%2032.png)
+
+##### Upload file index.html thông qua FileManager trên DirectAdmin
+- Tại thư mục gốc của trang web (/domain/quyennx.xyz/public_html), chọn **Upload files to current directory** để tải file lên
+
+![image](./image/DA%2029.png)
+
+- Chọn file cần upload và chọn **Upload Files**
+
+![image](./image/DA%2033.png)
+
+- Tải file thành công
+
+![image](./image/DA%2034.png)
+
+- Kết quả hiển thị trên trang web
+
+![image](./image/DA%2035.png)
+
+### Thiết lập database
+##### Tạo database
+- Từ trang chính của User, chọn **MySQL Management**
+
+![image](./image/DA%2036.png)
+
+- Chọn **Create new Database** để truy cập trang tạo mới CSDL
+
+![image](./image/DA%2037.png)
+
+- Nhập các thông tin cho CSDL và chọn **Create** để tạo CSDL
+
+![image](./image/DA%2038.png)
+
+- Tạo thành công
+
+![image](./image/DA%2039.png)
+
+### Cài đặt SSL lên tên miền
+##### Sử dụng SSL trả phí
+- Đăng ký chứng chỉ SSL tại trang web ssls.com
+- Ở trang chính của User, chọn **SSL Certificates** tại **Advanced Features**
+
+![image](./image/DA%2040.png)
+
+- Chọn **Paste a pre-generated certificate and key** và dán theo thứ tự private key -> certificate vào text box rồi chọn **Save** để lưu lại chứng chỉ
+
+![image](./image/DA%2041.png)
+
+- Kiểm tra kết quả trên trang web
+
+![image](./image/DA%2042.png)
+
+### Thiết lập CustomBuild
+- Để truy cập CustomBuild, chọn **CustomBuild 2.0** tại trang chính của Admin Level
+
+![image](./image/DA%2043.png)
+
+##### Update các phần mềm đã cài đặt
+- Tại tab **Update Software**, danh sách các phần mềm đang có bản cập nhật sẽ xuất hiện tại đây, chọn **Update** để cập nhật cho phần mềm đó
+
+![image](./image/DA%2044.png)
+
+- Quá trình cập nhật
+
+![image](./image/DA%2045.png)
+
+##### Cài đặt các phần mềm mới
+- Tại tab **Build Software**, danh sách các phần mềm có thể cài đặt được trên server sẽ xuất hiện tại đây
+
+- Để cài đặt/cập nhật các phần mềm, chọn **Build** ở phần mềm muốn được cài đặt
+
+![image](./image/DA%2046.png)
+
+- Quá trình cài đặt
+
+![image](./image/DA%2047.png)
