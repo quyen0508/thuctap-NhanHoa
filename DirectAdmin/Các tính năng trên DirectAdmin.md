@@ -230,6 +230,7 @@ User được thiết lập dưới quyền cấp Reseller
 
 ![image](./image/DA%2043.png)
 
+#### Thiết lập bằng giao diện
 ##### Update các phần mềm đã cài đặt
 - Tại tab **Update Software**, danh sách các phần mềm đang có bản cập nhật sẽ xuất hiện tại đây, chọn **Update** để cập nhật cho phần mềm đó
 
@@ -249,3 +250,64 @@ User được thiết lập dưới quyền cấp Reseller
 - Quá trình cài đặt
 
 ![image](./image/DA%2047.png)
+
+#### Thiết lập bằng dòng lệnh
+##### Build PHP
+- Trỏ đường dẫn tới thư mục /usr/local/directadmin/custombuild
+- Tạo 4 cấu hình PHP với mode là php-fpm
+```sh
+./build set php1_mode php-fpm
+./build set php2_mode php-fpm
+./build set php3_mode php-fpm
+./build set php4_mode php-fpm
+```
+
+- Gán từng phiên bản PHP cho từng cấu hình
+```sh
+./build set php1_release 5.6
+./build set php2_release 7.0
+./build set php3_release 7.3
+./build set php4_release 7.4
+
+- Build PHP
+```sh
+./build php n
+```
+
+- Nếu gặp thông báo ```Your DirectAdmin version (1.61) is older than minimal required for this version of CustomBuild (1.63)``` thì chạy lệnh để hạ phiên bản DirectAdmin xuống thành 1.61
+```sh
+sed -i 's/1.63/1.61/g'  /usr/local/directadmin/custombuild/build
+```
+
+- Chạy lại cấu hình
+```sh
+./build rewrite_confs
+```
+
+- Để chọn phiên bản PHP, truy cập **Domain Setup** dưới **User Level**
+
+![image](./image/DA%2048.png)
+
+- Chọn tên miền cần thay đổi phiên bản PHP
+
+![image](./image/DA%2049.png)
+
+- Tại mục **PHP Version Selector**, chọn phiên bản PHP tại cột **Handler** của **First PHP** và chọn **Save** để thay đổi phiên bản
+
+![image](./image/DA%2050.png)
+
+- Thay đổi thành công
+
+![image](./image/DA%2051.png)
+
+- Để kiểm tra phiên bản PHP, tạo file info.php tại thư mục public_html của tên miền
+
+![image](./image/DA%2052.png)
+
+- Nội dung file info.php
+
+![image](./image/DA%2053.png)
+
+- Kiểm tra trên trình duyệt bằng đường dẫn ```tên-miền/info.php```
+
+![image](./image/DA%2054.png)
