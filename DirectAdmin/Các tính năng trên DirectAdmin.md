@@ -268,6 +268,7 @@ User được thiết lập dưới quyền cấp Reseller
 ./build set php2_release 7.0
 ./build set php3_release 7.3
 ./build set php4_release 7.4
+```
 
 - Build PHP
 ```sh
@@ -279,7 +280,7 @@ User được thiết lập dưới quyền cấp Reseller
 sed -i 's/1.63/1.61/g'  /usr/local/directadmin/custombuild/build
 ```
 
-- Chạy lại cấu hình
+- Lưu lại cấu hình
 ```sh
 ./build rewrite_confs
 ```
@@ -311,3 +312,187 @@ sed -i 's/1.63/1.61/g'  /usr/local/directadmin/custombuild/build
 - Kiểm tra trên trình duyệt bằng đường dẫn ```tên-miền/info.php```
 
 ![image](./image/DA%2054.png)
+
+#### Build webserver chuyển đổi giữa Apache và NGINX
+- Chuyển thư mục làm việc về /usr/local/directadmin/custombuild/ để dễ dàng thao tác hơn bằng lệnh
+```sh
+cd /usr/local/directadmin/custombuild/
+```
+
+- Kiểm tra webserver đang được sử dụng tại file options.conf bằng lệnh
+```sh
+vi options.conf
+```
+
+- Tại dòng 27, webserver hiện tại đang là apache
+
+![image](./image/DA%2055.png)
+
+- Để chuyển đổi sang nginx, sửa apache thành nginx và lưu file lại
+
+- Chạy lệnh ```./build update``` để cập nhật danh sách build
+
+- Chạy lệnh ```./build nginx``` để CustomBuild thực hiện thay thế Apache bằng NGINX
+
+- Nếu gặp thông báo ```Your DirectAdmin version (1.61) is older than minimal required for this version of CustomBuild (1.63)``` thì chạy lệnh để hạ phiên bản DirectAdmin xuống thành 1.61
+```sh
+sed -i 's/1.63/1.61/g'  /usr/local/directadmin/custombuild/build
+```
+
+- Sau khi build xong, lưu lại thiết lập file config bằng lệnh
+```sh
+./build rewrite_confs
+```
+
+- Để chuyển ngược lại từ NGINX sang Apache, cần sửa lại dòng 27 của file options.conf từ nginx thành apache sau đó chạy các lệnh tương tự như khi chuyển từ Apache sang NGINX
+
+#### Kết hợp NGINX và Apache
+- Apache có ưu điểm tốt hơn NGINX trong việc xử lý các web động, ngược lại, NGINX lại tốt hơn Apache trong việc xử lý web tĩnh
+- Do đó, kết hợp cả 2 sẽ giúp tận dụng được hết khả năng của 2 loại webserver này
+- NGINX được sử dụng như một reverse proxy của Apache. Đối với các nội dung tĩnh, NGINX xử lý nhanh chóng và trực tiếp cho client, còn đối với nội dung động, NGINX sẽ chuyển cho Apache thực hiện rồi gửi kết quả ngược về NGINX để trả về cho client
+- Đơn giản hơn thì NGINX xử lý các nội dung tĩnh như HTML, CSS, JS,... còn Apache xử lý các nội dung động như PHP,...
+- Để build reverse proxy NGINX-Apache sửa file cấu hình options.conf tại đường dẫn /usr/local/directadmin/custombuild/
+```sh
+cd /usr/local/directadmin/custombuild
+vi options.conf
+```
+
+- Sửa giá trị webserver tại dòng 27 thành nginx_apache
+
+![image](./image/DA%2056.png)
+
+- Chạy lệnh ```./build update``` để cập nhật danh sách build
+
+- Chạy lệnh ```./build nginx_apache``` để CustomBuild thực hiện build nginx_apache
+
+- Nếu gặp thông báo ```Your DirectAdmin version (1.61) is older than minimal required for this version of CustomBuild (1.63)``` thì chạy lệnh để hạ phiên bản DirectAdmin xuống thành 1.61
+```sh
+sed -i 's/1.63/1.61/g'  /usr/local/directadmin/custombuild/build
+```
+
+- Sau khi build xong, lưu lại thiết lập file config bằng lệnh
+```sh
+./build rewrite_confs
+```
+
+#### Cài đặt OpenLiteSpeed
+- OpenLiteSpeed là phiên bản mã nguồn mở và miễn phí của phiên bản LiteSpeed Web Server Enterprise. OpenLiteSpeed chứa gần hết các tính năng cần thiết có trong LiteSpeed EnterPrise, bao gồm LSCache - là một plugin cần thiết cho WordPress
+- Chuyển thư mục làm việc về /usr/local/directadmin/custombuild/ để dễ dàng thao tác hơn bằng lệnh
+```sh
+cd /usr/local/directadmin/custombuild/
+```
+
+- Cập nhật lại tập lệnh CustomBuild bằng lệnh
+```sh
+./build update
+```
+
+- Thay đổi cấu hình webserver thành OpenLiteSpeed
+```sh
+./build set webserver openlitespeed
+```
+
+- Tắt mod_ruid2 vì mod_ruid2 chỉ hoạt động với Apache
+```sh
+./build set mod_ruid2 no
+```
+
+- Chỉnh mode của các phiên bản PHP thành lsphp
+```sh
+./build set php1_mode lsphp
+./build set php2_mode lsphp
+./build set php3_mode lsphp
+./build set php4_mode lsphp
+```
+
+- Thực hiện build OpenLiteSpeed
+```sh
+./build openlitespeed
+```
+
+- Nếu gặp thông báo ```Your DirectAdmin version (1.61) is older than minimal required for this version of CustomBuild (1.63)``` thì chạy lệnh để hạ phiên bản DirectAdmin xuống thành 1.61
+```sh
+sed -i 's/1.63/1.61/g'  /usr/local/directadmin/custombuild/build
+```
+
+- Build lại các phiên bản PHP để tương thích với OpenLiteSpeed
+```sh
+./build php n
+```
+
+- Lưu lại các thiết lập
+```sh
+./build rewrite_confs
+```
+
+- Lưu ý: Dashboard của OpenLiteSpeed chạy trên cổng 7080, vì vậy cần mở cổng trong firewall để có thể truy cập
+
+#### Cài đặt ImunifyAV
+- ImunifyAV là một phần mềm miễn phí có thể quét hầu hết các mã nguồn PHP nhằm giúp phát hiện các phần mềm độc hại
+- Để cài đặt, thực hiện lệnh tải file cài và tiến hành chạy file cài bằng lệnh
+```sh
+wget https://repo.imunify360.cloudlinux.com/defence360/imav-deploy.sh
+bash imav-deploy.sh
+```
+
+- Để cập nhật cơ sở dữ liệu và phiên bản mới nhất của ImunifyAV, sử dụng lệnh
+```sh
+yum update imunify-antivirus
+```
+
+- ImunifyAV có thể được tìm thấy trong trang chính của Admin Level tại mục **Extra Features**
+
+![image](./image/DA%2057.png)
+
+- Giao diện chính của ImunifyAV
+
+![image](./image/DA%2058.png)
+
+#### Cài đặt Imagick
+- Imagick là bộ phần mềm xử lý các file ảnh, dùng để tạo và sửa đổi các hình ảnh sử dụng Imagick API
+- Imagick có khả năng đọc, ghi và chuyển đổi nhiều định dạng file ảnh như JPEG, GIF, PNG, TIFF, PDF, PostScript và SVG,...
+- Imagick có thể dùng để thực hiên các thao tác đơn giản với hình ảnh như dịch chuyển, xoay hình, lật hình, thu phóng, kéo xiên hình, hiệu chỉnh màu sắc hoặc vẽ thêm chữ và các khối hình vào file hình ảnh sẵn có
+- Để cài đặt Imagick, chuyển thư mục làm việc về /usr/local/directadmin/custombuild/ để dễ dàng thao tác hơn bằng lệnh
+```sh
+cd /usr/local/directadmin/custombuild/
+```
+
+- Sử dụng lệnh ```./build update``` để cập nhật CustomBui;d
+
+- Sử dụng lệnh ```./build set imagick yes``` để sửa để thay đổi cài đặt trong file options.conf
+
+- Sử dụng lệnh để cài đặt bản build
+```sh
+./build imagick
+```
+
+- Nếu gặp thông báo ```Your DirectAdmin version (1.61) is older than minimal required for this version of CustomBuild (1.63)``` thì chạy lệnh để hạ phiên bản DirectAdmin xuống thành 1.61
+```sh
+sed -i 's/1.63/1.61/g'  /usr/local/directadmin/custombuild/build
+```
+
+- Build lại các phiên bản PHP để tương thích với OpenLiteSpeed
+```sh
+./build php n
+```
+
+- Kiểm tra việc cài đặt thành công trên trang tên-miền/php.info
+
+![image](./image/DA%2063.png)
+
+### Backup/Restore User
+- Để backup và restore cho User, truy cập trang chính của User Level chọn **Create/Restore Backups** tại **Your Account**
+
+![image](./image/DA%2059.png)
+
+- Chọn những mục muốn sao lưu và chọn **Create Backup** để tiến hành sao lưu, quá trình sao lưu có thể mất nhiều thời gian tùy thuộc vào lượng dữ liệu cần sao lưu
+
+![image](./image/DA%2060.png)
+
+- Để khôi phục lại các bản sao lưu, chọn phiên bản đã được sao lưu ở dưới tùy chọn sao lưu và chọn **Select Restore Options**
+
+![image](./image/DA%2061.png)
+
+- Chọn các mục muốn khôi phục từ bản sao lưu và chọn **Restore Selected Items**, quá trình có thể mất nhiều thời gian tùy thuộc vào lượng dữ liệu cần khôi phục
+
+![image](./image/DA%2062.png)
