@@ -476,7 +476,7 @@ sed -i 's/1.63/1.61/g'  /usr/local/directadmin/custombuild/build
 ./build php n
 ```
 
-- Kiểm tra việc cài đặt thành công trên trang tên-miền/php.info
+- Kiểm tra việc cài đặt thành công trên trang tên-miền/info.php
 
 ![image](./image/DA%2063.png)
 
