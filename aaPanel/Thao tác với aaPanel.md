@@ -183,7 +183,126 @@
 
 ![image](./image/aaPanel%2039.png)
 
+- Để sử dụng, gõ lệnh ```bt``` và chọn số tương ứng với tùy chọn mong muốn
+
 ### App Store
 - App Store bao gồm danh sách các ứng dụng đã cài và có thể cài lên server
 
 ![image](./image/aaPanel%2040.png)
+
+- Các thông tin của ứng dụng bao gồm: giá của ứng dụng, thời hạn sử dụng của ứng dụng (nếu phải trả phí), vị trí cài đặt, trạng thái chạy của ứng dụng, hiện thị trên dashboard
+- Các thao tác với mỗi ứng dụng có thể bao gồm: mua ứng dụng nếu phải trả phí, cài đặt ứng dụng, cập nhật, thiết lập và gỡ cài đặt ứng dụng
+
+### Cài đặt WordPress
+- Truy cập **App Store** và cài đặt ứng dụng ```one-click deployment```
+
+![image](./image/aaPanel%2041.png)
+
+- Mở ứng dụng ```one-click deployment``` bằng cách chọn **Setting**, tìm đến **WordPress** và chọn **One-click**
+
+![image](./image/aaPanel%2042.png)
+
+- Nhập thông tin cho trang web, chọn **Submit** và chờ đợi cài đặt
+
+![image](./image/aaPanel%2043.png)
+
+- Cài đặt thành công
+
+![image](./image/aaPanel%2044.png)
+
+- Truy cập trang WordPress để tiến hành cài đặt
+- Chọn ngôn ngữ
+
+![image](./image/aaPanel%2045.png)
+
+- Nhập thông tin liên quan đến CSDL
+
+![image](./image/aaPanel%2046.png)
+
+![image](./image/aaPanel%2047.png)
+
+![image](./image/aaPanel%2048.png)
+
+- Nhập thông tin quản lý cho trang web
+
+![image](./image/aaPanel%2049.png)
+
+- Cài đặt thành công
+
+![image](./image/aaPanel%2050.png)
+
+- Tiến hành đăng nhập
+
+![image](./image/aaPanel%2051.png)
+
+- Trang chính của WordPress
+
+![image](./image/aaPanel%2052.png)
+
+- Tạo thử một bài viết
+
+![image](./image/aaPanel%2053.png)
+
+### Security
+- Tab **Security** dùng để quản lý kết nối SSH, mở cổng (port), chặn IP và xem log của panel
+
+![image](./image/aaPanel%2054.png)
+
+![image](./image/aaPanel%2055.png)
+
+### Docker
+- Docker là một nền tảng giúp triển khai các ứng dụng Linux và Windows vào trong các container ảo hóa
+- Đặc điểm của docker là cho phép tạo ra mô trường độc lập và tách biệt để các container chạy độc lập với nhau
+
+##### Ưu điểm của docker
+- Thời gian chạy/dừng container nhanh hơn nhiều so với việc dùng máy ảo
+- Có thể chạy container trên mỗi hệ thống mong muốn
+- Container có thể build/loại bỏ nhanh hơn máy ảo
+- Dễ dàng thiết lập môi trường làm việc: Chỉ cần cấu hình một lần duy nhất file cấu hình, mỗi khi đổi máy hoặc có người mới tham gia project thì chỉ cần sử dụng lại cấu hình trước đó
+
+##### Cài đặt docker
+- Sử dụng dòng lệnh
+```sh
+yum update
+curl -fsSL https://get.docker.com/ | sh
+systemctl enable docker
+systemctl start docker
+```
+Trong đó:
+> yum update
+
+dùng để cập nhật CSDL các gói phần mềm
+
+> curl -fsSL https://get.docker.com/ | sh
+
+dùng để tải nội dung từ trang https://get.docker.com/ xuống và cài đặt theo nội dung của trang web
+
+> systemctl enable docker
+
+dùng để khởi động docker mỗi khi khởi động server
+
+> systemctl start docker
+
+dùng để khởi chạy docker
+
+- Sử dụng giao diện trên aaPanel: Truy cập tab **Docker** sau đó chọn **Install**
+
+![image](./image/aaPanel%2056.png)
+
+##### Ví dụ chạy một container
+```sh
+docker run -it --rm \
+	--name n8n \
+	-p 5678:5678 \
+	-v ~/.n8n:/home/node/.n8n \
+	n8nio/n8n
+```
+Trong đó
+```docker run``` là lệnh dùng để chạy một container
+```-it``` dùng để chạy docker có thể tương tác được
+```--rm``` giúp xóa container sau khi thoát khỏi nó
+```--name n8n``` tên của container
+```-p 5678:5678``` gán port từ host tới container
+```-v ~/.n8n:/home/node/.n8n``` mount thư mục của host vào thư mục của container
+
+![image](./image/aaPanel%2057.png)
