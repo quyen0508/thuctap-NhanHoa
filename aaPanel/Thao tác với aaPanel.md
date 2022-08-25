@@ -298,11 +298,17 @@ docker run -it --rm \
 	n8nio/n8n
 ```
 Trong đó
+
 ```docker run``` là lệnh dùng để chạy một container
+
 ```-it``` dùng để chạy docker có thể tương tác được
+
 ```--rm``` giúp xóa container sau khi thoát khỏi nó
+
 ```--name n8n``` tên của container
+
 ```-p 5678:5678``` gán port từ host tới container
+
 ```-v ~/.n8n:/home/node/.n8n``` mount thư mục của host vào thư mục của container
 
 ![image](./image/aaPanel%2057.png)
