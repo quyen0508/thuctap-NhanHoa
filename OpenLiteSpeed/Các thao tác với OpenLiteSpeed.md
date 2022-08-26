@@ -196,3 +196,5 @@ Lệnh gia hạn sẽ được chạy vào lúc 4h30 mỗi ngày
 ##### Cấu hình SSL bằng WordPress
 - Ngoài cách sử dụng dòng lệnh, trên WordPress có sẵn một plugin tên là ```Really Simple SSL```
 - Để sử dụng cần tìm kiếm tại kho Plugin và tiến hành cài đặt -> kích hoạt plugin
+
+![image](./image/OLS%2041.png)
