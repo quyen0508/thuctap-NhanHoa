@@ -249,3 +249,62 @@
 
 ![image](./image/cPanel%2054.png)
 
+### ModSecurity
+- ModSecurity là một tường lửa cho ứng dụng web theo dõi lưu lượng web theo thời gian thực và chặn các kết nối độc hại trước khi chúng truy cập tới các ứng dụng
+- ModSecurity là tường lửa dựa trên luật, nó so sánh các yêu cầu với một danh sách các luật, tìm các mẫu ứng với các kiểu tấn công như SQL injection, session hijacking, cross-site scripting,...
+- Mặc dù người dùng có thể tự thêm luật, các luật thường được cung cấp như một bộ luật bởi bên thứ ba
+
+##### So sánh với CSF
+- CSF là một tường lửa lớp mạng vốn dùng để giám sát lưu lượng độc hại tại tầng mạng, do đó không thể ngăn chặn các cuộc tấn công ứng dụng web vì chúng giống như các yêu cầu trang web hợp lệ
+- Trong khi đó, ModSecurity hay WAF (Web Application Firewall) nói chung có thể xác định các yêu cầu HTTP tiềm ẩn độc hại
+- Có thể sử dụng cả 2 loại tường lửa để nâng cao bảo mật cho trang web
+
+##### Cài đặt ModSecurity
+- Chọn tab **ModSecurity Vendors**, tại đây có các bản phân phối của ModSecurity, để cài đặt, chọn **Install** với phiên bản muốn cài đặt
+
+![image](./image/cPanel%2058.png)
+
+- Xác nhận cài đặt
+
+![image](./image/cPanel%2059.png)
+
+- Cài đặt thành công
+
+![image](./image/cPanel%2060.png)
+
+##### Cấu hình luật cho ModSecurity
+- Truy cập tab **Security Tools**, tại đây có danh sách lịch sử về các sự kiện của luật
+- Để truy cập danh sách luật, chọn **Rules List**
+
+![image](./image/cPanel%2061.png)
+
+- Tại **Rules List**, có thể thêm luật (**Add Rule**), sửa luật (**Edit Rules**), copy luật (**Copy**) và vô hiệu hoá các luật (**Disable**)
+
+- Để thêm luật, chọn **Add Rule**
+- Điền luật vào hộp **Rule Text** và chọn **Add** để lưu luật
+
+![image](./image/cPanel%2062.png)
+
+- Cần khởi động lại web server để áp dụng thay đổi, tick **Deploy and Restart Apache** trước khi chọn **Save**
+
+- Để thêm luật bằng giao diện dòng lệnh, truy cập file modsec2.user.conf.STAGE tại đường dẫn /etc/apache2/conf.d/modsec
+```sh
+nano /etc/apache2/conf.d/modsec/modsec2.user.conf.STAGE
+```
+
+- Lưa lại file và khởi động lại Apache
+```sh
+systemctl restart httpd
+```
+
+- Cấu trúc của luật trên ModSecurity
+```sh
+SecRule VARIABLES "OPERATOR" "TRANSFORMATIONS,ACTIONS"
+```
+
+Trong đó:
+    - **Variables** là phần yêu cầu mà ModSecurity quan tâm tới
+    - **Operators** là điều kiện để thực thi luật
+    - **Transformations** là cách để chuẩn hoá dữ liệu của biến (variable)
+    - **Actions** là hành động thực thi khi gặp điều kiện nhất định
+
