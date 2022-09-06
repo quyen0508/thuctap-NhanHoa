@@ -104,3 +104,12 @@
 ##### Các tuỳ chọn người dùng
 - **User Preference**: Đặt tuỳ chọn người dùng
 - **User Manager**: Đặt và chỉnh sửa quyền và quyền của người dùng
+
+### SO sánh WHM và cPanel
+| Tiêu chí | WHM | cPanel |
+| - | - | - |
+| Bảng điều khiển | WHM là control panel dành cho bên đại lý, được dùng để quản lý các tài khoản hosting theo các gói dịch vụ của bên bán (đại lý) | cPanel là control panel được sử dụng bởi người dùng cuối dưới nhà cung cấp dịch vụ hosting (đại lý), dùng để quản lý tài khoản hosting của họ (người dùng) |
+| Quyền truy cập | WHM cung cấp cho các bên đại lý quyền truy cập root | cPanel chỉ cung cấp quyền truy cập tới tài khoản hosting trên server |
+| Cổng hoạt động | WHM hoạt động trên cổng 2087 | cPanel hoạt động trên cổng 2083 |
+| Đặt lại mật khẩu | Mật khẩu khi đặt lại trên WHM thì trên cPanel cũng sẽ được thay đổi | Mật khẩu chỉ có thể được đặt bởi người dùng cuối |
+| Tên miền | Mỗi đại lý chỉ có thể tạo domain chính mà không được tạo tên miền phụ/con (subdomain) | Có khả năng thêm và xoá các domain add-on hoặc subdomain |
