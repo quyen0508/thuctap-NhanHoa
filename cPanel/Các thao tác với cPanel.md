@@ -303,8 +303,8 @@ SecRule VARIABLES "OPERATOR" "TRANSFORMATIONS,ACTIONS"
 ```
 
 Trong đó:
-    - **Variables** là phần yêu cầu mà ModSecurity quan tâm tới
-    - **Operators** là điều kiện để thực thi luật
-    - **Transformations** là cách để chuẩn hoá dữ liệu của biến (variable)
-    - **Actions** là hành động thực thi khi gặp điều kiện nhất định
+- **Variables** là phần yêu cầu mà ModSecurity quan tâm tới
+- **Operators** là điều kiện để thực thi luật
+- **Transformations** là cách để chuẩn hoá dữ liệu của biến (variable)
+- **Actions** là hành động thực thi khi gặp điều kiện nhất định
 
