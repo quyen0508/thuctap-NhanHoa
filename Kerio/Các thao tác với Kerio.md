@@ -346,3 +346,214 @@ https://github.com/quyen0508/thuctap-NhanHoa/blob/main/Kerio/C%C3%A1c%20thao%20t
     - **Reject the message as if it was a virus (use the settings above)** (Coi như thư có chứa virus và thực hiện hành động như phía trên)
 
 ![image](./image/Kerio%2057.png)
+
+#### Attachment Filter
+- Kerio cung cấp việc kiểm tra các file đính kèm để tránh việc lây nhiễm virus bằng việc vô tình mở file đính kèm có chèn mã độc
+- **Attachment Filter** cho phép thêm các luật dùng để chặn/cho phép các file đính kèm
+
+![image](./image/Kerio%2058.png)
+
+- Người quản trị có thể chọn quy tắc cho luật theo tên file hoặc kiểu MIME
+
+![image](./image/Kerio%2074.png)
+
+    - Lọc theo tên file sẽ dựa theo đuôi file để cho phép/chặn các tệp đính kèm
+
+    ![image](./image/Kerio%2075.png)
+
+    - Lọc theo kiểu của MIME (Multipurpose Internet Mail Extensions - là tiêu chuẩn giúp phân loại tập tin được sử dụng trên Internet)
+
+    ![image](./image/Kerio%2076.png)
+
+- Khi gặp thư có chứa điều kiện trên, người quản trị có thể cấu hình để gửi thư gốc hoặc đã được loại bỏ tới địa chỉ chỉ định
+- Ngoài ra còn có tuỳ chọn loại bỏ file zip chứa các file có đuôi mở rộng nguy hiểm (ví dụ như file thực thi *.exe)
+
+#### Message Filters
+- Kerio cung cấp việc kiểm tra tiêu đề, nội dung thư,... bằng **Message Filters** cho việc gửi và nhận thư
+
+![image](./image/Kerio%2059.png)
+
+- Người quản trị có thể cấu hình điều kiện cho các luật
+
+![image](./image/Kerio%2077.png)
+
+![image](./image/Kerio%2078.png)
+
+- Cùng với đó là các hành động khi thoả mãn điều kiện của luật
+
+![image](./image/Kerio%2079.png)
+
+![image](./image/Kerio%2080.png)
+
+#### Time Ranges
+- **Time Ranges** là khoảng thời gian có thể sử dụng các dịch vụ của Kerio
+
+![image](./image/Kerio%2060.png)
+
+- Người quản trị có thể đặt thời gian bắt đầu, thời gian kết thúc và lịch lặp lại theo ngày/tuần
+
+![image](./image/Kerio%2081.png)
+
+#### IP Address Groups
+- IP Address Groups giúp gộp nhóm những địa chỉ IP giúp quản lý theo nhóm tốt hơn
+
+![image](./image/Kerio%2061.png)
+
+- Người quản trị có thể thêm địa chỉ IP vào nhóm hiện có hoặc tạo nhóm mới
+
+![image](./image/Kerio%2082.png)
+
+#### User Access Policies
+- Cho phép người quản trị thiết lập truy cập một số dịch vụ dành cho người dùng cụ thể
+
+![image](./image/Kerio%2062.png)
+
+- Người quản trị có thể
+    - Đặt tên cho chính sách
+
+    ![image](./image/Kerio%2083.png)
+
+    - Chọn dịch vụ
+
+    ![image](./image/Kerio%2084.png)
+
+    - Cho phép hoặc chặn dịch vụ
+
+    ![image](./image/Kerio%2085.png)
+
+#### User Templates
+- Người quản trị có thể tạo các mẫu cho user giúp cho việc thiết lập các user có cấu hình tương tự nhau trở nên dễ dàng, nhanh chóng hơn
+
+![image](./image/Kerio%2063.png)
+
+- Việc cấu hình tương tự như khi tạo một user mới
+
+#### Company Locations
+- Company Locations giúp thêm thông tin liên hệ về công ty
+
+![image](./image/Kerio%2064.png)
+
+- Người quản trị có thể thêm các thông tin như tên, địa chỉ, số điện thoại, tên miền,...
+
+![image](./image/Kerio%2086.png)
+
+### Logs
+- Logs là những file giúp Kerio ghi lại thông tin về những sự kiện, ví dụ như lỗi, cảnh báo và debug, dựa vào đó có thể biết được trạng thái của server cũng như tìm được nguyên nhân dẫn đến lỗi để tìm cách khắc phục
+
+#### Các loại log trong Kerio
+##### Config
+- Config log lưu trữ các thay đổi cấu hình trên server
+- Các loại config log
+    - Lưu trữ các thông tin đăng nhập trang quản trị Kerio Connect
+    - Lưu trữ các thông tin thay đổi cấu hình trên CSDL
+    - Những thay đổi khác trong cấu hình
+
+##### Debug
+- Sử dụng để giám sát các loại thông tin nhất định
+- Mặc định sẽ hiển thị các thông tin liên quan đến khởi động và dứng dịch vụ, giao thức trên Mailserver Kerio Connect
+- Liệt kê các dịch vụ và port kết nối phục vụ cho quá trình vận hành của mail server và các thông tin khác mô tả quá trình xử lế của mail server
+
+##### Error
+- Hiển thị những lỗi lớn mà có thể ảnh hưởng đến sự vận hành của mail server
+- Điển hình có thể kể đến như là việc khởi tạo dịch vụ bị lỗi, phân phát không gian đĩa, khởi động kiểm tra antivirus, sự xác thực không hợp lệ của người dùng
+
+##### Mail
+- Ghi lại tiến trình xử lý mail
+    - Mail gửi đến
+    - Mail gửi đi
+    - Mailing Lists
+
+##### Operations
+- Lưu lại những thay đổi như xoá và di chuyển các email, danh bạ, sự kiện, nhiệm vụ hay ghi chú trong hộp thư của người dùng. Trường hợp email bị đánh dấu spam hay di chuyển vào hòm thư spam cũng được ghi lại
+
+##### Security
+- Ghi lại thông tin liên quan đến bảo mật của Kerio Connect và chứa các bản ghi về các email không gửi được
+
+##### Spam
+- Hiển thị thông tin về tất cả các email spam được lưu trữ hoặc được đánh dấu trong Kerio Connect
+
+##### Warning
+- Hiển thị các thông báo cảnh báo về các lỗi có ý nghĩa nhỏ
+- Các sự kiện được ghi trong mục này thường không ảnh hưởng lớn đến hoạt động của Kerio Connect
+
+##### Audit
+- Lưu trữ các thông tin về các lần xác thực thành công tài khoản Kerio Connect
+- Bao gồm: tài khoản quản trị Kerio Connect, Kerio Connect Client, Microsoft Outlook,...
+
+#### Các thao tác với log
+##### Lưu file log về máy
+- Có thể chọn lưu file log về máy theo dạng văn bản thông thường hoặc kiểu HTML và chọn lưu toàn bộ file hoặc một phần được chỉ định
+
+![image](./image/Kerio%2087.png)
+
+##### Highlighting
+- Highlighting làm nổi bật các dòng log đáng chú ý được thiết lập tuỳ ý
+- Cài đặt làm nổi bật bằng các từ khoá hoặc biểu thức chính quy (regex)
+
+![image](./image/Kerio%2088.png)
+
+- Các dòng chứa từ khoá đã được thiết lập sẽ có màu vàng
+
+![image](./image/Kerio%2089.png)
+
+##### Log Settings
+- Mục **File Logging** có thể thiết lập để tự tạo file log mới theo chu kỳ hoặc đến kích thước giới hạn
+
+![image](./image/Kerio%2090.png)
+
+- Mục **External Logging** dùng để thiết lập Syslog logging
+
+![image](./image/Kerio%2091.png)
+
+## Cấu hình DKIM, DMARC, SPF trên Kerio
+### DKIM
+- DKIM viết tắt của Domain Keys Identified Mail
+- Là một phương thức giúp xác nhận các email thông qua chữ ký số của miền gửi thư dùng để tránh giả mạo
+- DKIM ban đầu được thiết kế để người nhận có thể xác định email đến từ miền cụ thể nào, tên miền đó thật không và có được uỷ quyền hay không
+
+### DMARC
+- DMARC là một tiêu chuẩn để chặn spammer khỏi sử dụng domain của người sở hữu mà không được sự cho phép của họ
+- Thực tế, ai cũng có thể giả mạo địa chỉ tại trường "From" trong mail một cách dễ dàng, cơ chế này gọi là spoofing
+- DMARC sẽ đảm bảo những mail giả mạo này sẽ bị chặn trước khi chúng đến mailbox của người nhận và chỉ có những người dùng mail hợp lệ mới được chấp nhận vào hệ thống
+
+### SPF
+- SPF viết tắt của Sender Policy Framwork
+- Là cách thức để xác nhận một email server có được phép gửi email dưới tên của một domain nào không
+
+### Cài đặt
+#### DKIM
+- Để cấu hình DKIM, truy cập vào tab **Configuration**, chọn **Domains**
+- Chuột phải tên miền cần cấu hình, chọn **Edit**
+
+![image](./image/Kerio%2092.png)
+
+- Chọn **Sign outgoing messages from this domain with DKIM signature** và chọn **Show public key** để lấy thông tin của DKIM
+
+![image](./image/Kerio%2093.png)
+
+- Thông tin của DKIM
+
+![image](./image/Kerio%2094.png)
+
+- Tạo bản ghi TXT trên trang quản lý DNS với thông tin Kerio đưa ra
+
+![image](./image/Kerio%2095.png)
+
+#### DMARC
+- Tạo bản ghi TXT trên trang quản lý DNS với nội dung
+
+![image](./image/Kerio%2096.png)
+
+> v=DMARC1; p=none; rua=mailto:mailauth-reports@mail.quyennx.xyz
+
+#### SPF
+- Tạo bản ghi TXT trên trang quản lý DNS với nội dung
+
+![image](./image/Kerio%2097.png)
+
+> v=spf1 +a +mx +ip4:103.159.51.14 ~all
+
+### Kiểm tra DKIM, DMARC và SPF
+- Kiểm tra bằng cách gửi 1 email từ Kerio Mailserver sang Gmail, chọn **Hiển thị thư gốc**
+
+![image](./image/Kerio%2098.png)
