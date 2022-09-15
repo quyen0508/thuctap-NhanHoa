@@ -349,3 +349,96 @@ su - zimbra -c 'zmmtactl restart'
     - **Quota warning message template**: Mẫu thư cảnh báo hạn mức
 
 ![image](./image/Zimbra%2029.png)
+
+### Thiết lập chữ ký email trong Zimbra
+- Truy cập trang chính của tài khoản (mailbox), chọn **Preferences** -> **Sigatures**
+
+- Để tạo chữ ký mới, truy cập mục **Signature** và nhập thông tin về tên cũng như nội dung của chữ ký
+
+![image](./image/Zimbra%2030.png)
+
+- Để sử dụng chữ ký, truy cập mục **Using Signatures**
+    - **New Messages**: áp dụng chữ ký với những thư viết mới
+    - **Replies & Forwards**: áp dụng chữ ký cho thư trả lời hoặc thư chuyển tiếp
+    - **Signature Placement**: vị trí đặt chữ ký trong nội dung bức thư (trên cùng hoặc dưới cùng)
+
+![image](./image/Zimbra%2031.png)
+
+- Sau khi thiết lập xong, chọn **Save** để lưu lại thiết lập
+
+- Kiểm tra khi gửi thư
+
+![image](./image/Zimbra%2032.png)
+
+### Backup và Restore trong Zimbra
+##### Backup
+- Việc backup đối với Zimbra được thực hiện bằng cách copy thư mục làm việc của Zimbra sang một thư mục khác
+
+- Trước khi sao lưu cần dừng Zimbra server lại
+```sh
+su - zimbra -c 'zmcontrol stop'
+```
+
+- Copy thư mục làm việc của Zimbra sang thư mục khác
+```sh
+cp -rp /opt/zimbra /mnt/zimbra_backup.$(date "+%Y%m%d")
+```
+
+- Sau khi sao lưu xong, khởi động Zimbra server
+```sh
+su - zimbra -c 'zmcontrol start'
+```
+
+##### Restore
+- Restore có thao tác ngược lại với backup
+
+- Trước khi khôi phục cần dừng Zimbra server lại
+```sh
+su - zimbra -c 'zmcontrol stop'
+```
+
+- Copy thư mục sao lưu vào vị trí chứa thư mục làm việc của Zimbra và đổi tên lại
+```sh
+cp -rp /mnt/zimbra_backup.20220915/ /opt
+mv /opt/zimbra_backup.20220915/ /opt/zimbra
+```
+
+- Cài đặt lại Zimbra
+```sh
+cd zcs-8.8.15_GA_3869.RHEL7_64.20190918004220
+./install.sh
+```
+
+- Cài đặt tương tự như khi cài đặt mới, khi gặp tuỳ chọn **Do you wish to upgrade? [Y]** thì chọn ```y``` để xoá bỏ gói hiện tại và cài đặt lại và chạy những file đã sao lưu
+
+- Cấp quyền cho các thư mục con của thư mục vừa được khôi phục
+```sh
+chown -R zimbra:zimbra /opt/zimbra/store
+chown -R zimbra:zimbra /opt/zimbra/index
+/opt/zimbra/libexec/zmfixperms
+```
+
+### Zimbra Log
+- Kiểm tra log Zimbra server giúp biết được mail có được gửi thành công hay không, nếu không thì xác định được lỗi ở đâu và các vấn đề khác của hệ thống
+
+- Tất cả log nội bộ của Zimbra server đều được lưu tại thư mục ```/opt/zimbra/log``` lưu trữ thời gian sự kiện, mức độ của sự kiện, tác vụ, tên tài khoản và địa chỉ IP cũng như mô tả liên quan đến sự kiện
+
+- Log level thể hiện mức độ ảnh hưởng của sự kiện tới server, có 4 mức độ
+    - **INFO**: các sự kiện có mục đích thông báo về các tiến trình của Zimbra như tạo, xoá message,...
+    - **WARN**: các sự kiện có nguy cơ tiềm tàng nhưng không ảnh hưởng tới hoạt động của server, ví dụ như sự kiện đăng nhập không hợp lệ của một người dùng
+    - **ERROR**: các sự kiện lỗi nhưng không ảnh hưởng tới hoạt động của server, ví dụ như cảnh báo về việc index dữ liệu của một người dùng đang bị lỗi
+    - **FATAL**: các sự kiện khiến cho server không hoạt động bình thường, ví dụ như thông báo không thể kết nối tới cơ sở dữ liệu
+
+- Các file log mailbox.log đều được tách ra thành các file riêng lẻ có kèm tên theo ngày, ví dụ như ```mailbox.log.2022-09-14.gz```
+
+- Thư mục ```/opt/zimbra/log``` còn lưu một vài file log khác như ```audit.log``` dùng để log lại việc liên quan đến đăng nhập
+
+- Để tìm các dòng log có tử khoá mong muốn hiển thị, dùng lệnh ```grep```
+    - grep -iE 'fatal|error' mailbox.log (hiện thị các dòng lỗi error hoặc fatal)
+    - grep -iEv -C3 'info|warn' mailbox.log (hiện thị thêm một vài dòng xung quanh lỗi)
+    - grep -iEv -A3 'info|warn' mailbox.log (hiển thị thêm một số dòng dưới dòng lỗi)
+
+- Ngoài ra, Zimbra cũng cung cấp cung cụ giúp theo dấu các email đã gửi/nhận là ```zmmsgtrace``` chạy bằng quyền root
+    - /opt/zimbra/libexec/zmmsgtrace -s user@example.com (theo dấu theo địa chỉ gửi)
+    - /opt/zimbra/libexec/zmmsgtrace -r '@gmail.com' (theo dấu theo địa chỉ nhận)
+    - /opt/zimbra/libexec/zmmsgtrace -r '@gmail.com' (theo dấu theo địa chỉ nhận từ các file log khác nhau)
