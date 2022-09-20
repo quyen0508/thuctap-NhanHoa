@@ -50,3 +50,15 @@ yum install bridge-ultils -y
 | Setting bridge 'hello' time | ```brctl sethello <bridge> <time>``` | |
 | Setting bridge maximum message age | ```brctl setmaxage <bridge> <time>``` | |
 | Setting cost of the port on bridge | ```brctl setpathcost <bridge> <port> <cost>``` | ```bridge link set dev <port> cost <cost>``` |
+| Setting bridge port priority | ```brctl setportprio <bridge> <port> <priority>``` | ```bridge link set dev <port> priority <priority>``` |
+| Should port process STP BDPUs | | ```bridge set dev <port> guard [on|off]``` |
+| Should bridge might send traffic on the port it was received | | ```bridge link set dev <port> hairpin [on|off]``` |
+| Enabling/disabling fastleave options on port | | ```bridge link set dev <port> fastleave [on|off]``` |
+| Setting STP port state | | ```bridge link set dev <port> state <state>``` |
+
+##### VLAN management commandline
+| ACTION | BRCTL | BRIDGE |
+| - | - | - |
+| Creating new VLAN filter entry | | ```bridge vlan add dev <dev> [vid|pvid|untagged|self|master]``` |
+| Delete VLAN filter entry | | ```bridge vlan delete dev <dev> [vid|pvid|untagged|self|master]``` |
+| List VLAN configuration | | ```bridge vlan show``` |
