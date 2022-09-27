@@ -10,7 +10,7 @@
 
 ### Kiến trúc của Linux Bridge
 
-![image](https://github.com/Tubui160999/thuctap_nhanhoa/blob/master/KVM/images/linuxbridge.png)
+![image](https://github.com/Tubui160999/thuctap_nhanhoa/blob/master/KVM/images/linuxbridge.png?raw=true)
 
 ### Chức năng của một switch ảo do Linux Bridge tạo ra
 - STP: là giao thức chống loop gói tin trong switch
