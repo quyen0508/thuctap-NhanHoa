@@ -1,0 +1,4 @@
+# Google Meet giới hạn thời gian gọi video với tài khoản miễn phí
+Google đã chấm dưới cuộc gọi điện video nhóm "không giới hạn" trong dịch vụ Google cho các tài khoản Gmail miễn phí. Giờ đây, người dùng sử dụng tài khoản miễn phí để đăng nhập Google Meet sẽ chỉ được mở các cuộc gọi nhóm với giới hạn 60 phút thay vì không giới hạn như trước đây
+
+Google Meet đã được mở cho người dùng phổ thông vào tháng 4 năm 2020 nhằm cạnh tranh tốt hơn với Zoom. Vào thời điểm đó, Google thông báo sẽ tổ chức ưu đãi các cuộc họp không giới hạn cho đến hết ngày 30 tháng 9 năm 2020. Nhưng sau đó Google đã kéo dài thời hạn sang tháng 3 năm 2021 và sau đó lại gia hạn đến cuối tháng 6. Google vẫn cho phép các cuộc gọi riêng biệt một-đối-một miễn phí và không giới hạn thời gian
