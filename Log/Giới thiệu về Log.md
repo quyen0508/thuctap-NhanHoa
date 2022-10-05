@@ -139,3 +139,294 @@ tail -n 10 /var/log/dmesg
     - Syslog có thể gửi qua UDP hoặc TCP
     - Các dữ liệu log được gửi dạng cleartext
     - Syslog mặc định dùng port 514
+
+##### Cấu hình của Syslog
+- File cấu hình của Syslog trên CentOS có đường dẫn /etc/rsyslog.conf
+- Ví dụ về file cấu hình và khai báo trên CentOS
+```sh
+# rsyslog configuration file
+
+# For more information see /usr/share/doc/rsyslog-*/rsyslog_conf.html
+# If you experience problems, see http://www.rsyslog.com/doc/troubleshoot.html
+
+#### MODULES ####
+
+# The imjournal module bellow is now used as a message source instead of imuxsock.
+$ModLoad imuxsock # provides support for local system logging (e.g. via logger command)
+$ModLoad imjournal # provides access to the systemd journal
+#$ModLoad imklog # reads kernel messages (the same are read from journald)
+#$ModLoad immark  # provides --MARK-- message capability
+
+# Provides UDP syslog reception
+#$ModLoad imudp
+#$UDPServerRun 514
+
+# Provides TCP syslog reception
+#$ModLoad imtcp
+#$InputTCPServerRun 514
+
+
+#### GLOBAL DIRECTIVES ####
+
+# Where to place auxiliary files
+$WorkDirectory /var/lib/rsyslog
+
+# Use default timestamp format
+$ActionFileDefaultTemplate RSYSLOG_TraditionalFileFormat
+
+# File syncing capability is disabled by default. This feature is usually not required,
+# not useful and an extreme performance hit
+#$ActionFileEnableSync on
+
+# Include all config files in /etc/rsyslog.d/
+$IncludeConfig /etc/rsyslog.d/*.conf
+
+# Turn off message reception via local log socket;
+# local messages are retrieved through imjournal now.
+$OmitLocalLogging on
+
+# File to store the position in the journal
+$IMJournalStateFile imjournal.state
+
+
+#### RULES ####
+
+# Log all kernel messages to the console.
+# Logging much else clutters up the screen.
+#kern.*                                                 /dev/console
+
+# Log anything (except mail) of level info or higher.
+# Don't log private authentication messages!
+*.info;mail.none;authpriv.none;cron.none                /var/log/messages
+
+# The authpriv file has restricted access.
+authpriv.*                                              /var/log/secure
+
+# Log all the mail messages in one place.
+mail.*                                                  -/var/log/maillog
+
+
+# Log cron stuff
+cron.*                                                  /var/log/cron
+
+# Everybody gets emergency messages
+*.emerg                                                 :omusrmsg:*
+
+# Save news errors of level crit and higher in a special file.
+uucp,news.crit                                          /var/log/spooler
+
+# Save boot messages also to boot.log
+local7.*                                                /var/log/boot.log
+
+
+# ### begin forwarding rule ###
+# The statement between the begin ... end define a SINGLE forwarding
+# rule. They belong together, do NOT split them. If you create multiple
+# forwarding rules, duplicate the whole block!
+# Remote Logging (we use TCP for reliable delivery)
+#
+# An on-disk queue is created for this action. If the remote host is
+# down, messages are spooled to disk and sent when it is up again.
+#$ActionQueueFileName fwdRule1 # unique name prefix for spool files
+#$ActionQueueMaxDiskSpace 1g   # 1gb space limit (use as much as possible)
+#$ActionQueueSaveOnShutdown on # save messages to disk on shutdown
+#$ActionQueueType LinkedList   # run asynchronously
+#$ActionResumeRetryCount -1    # infinite retries if host is down
+# remote host is: name/ip:port, e.g. 192.168.0.1:514, port optional
+#*.* @@remote-host:514
+# ### end of the forwarding rule ###
+```
+
+- Trong đó, các service cơ bản của hệ thống được lưu trữ tại Syslog, ví dụ như
+> cron.*                                                  /var/log/cron
+
+- Cấu hình như trên được chia làm 2 trường
+    - Trường 1: Trường Selector
+        - Trường Selector chỉ ra nguồn tạo ra log và mức cảnh báo của log đó
+        - Có 2 thành phần và được tách nhau bởi dấu "."
+    - Trường 2: Trường Action
+        - Chỉ ra nơi lưu log của tiến trình
+        - Có 2 loại là lưu file tại localhost và gửi đến IP của máy chủ log tập trung
+
+##### Các nguồn tạo log (Facility Level)
+| Numerical Code | Keyword | Facility Name |
+| - | - | - |
+| 0 | kern | Những log do kernel sinh ra |
+| 1 | user | Log ghi lại cấp độ người dùng |
+| 2 | mail | Log của hệ thống mail |
+| 3 | deamon | Log của các tiến trình trên nền hệ thống |
+| 4 | auth | Log từ quá trình đăng nhập hoặc xác thực hệ thống |
+| 5 | syslog | Log từ chương trình syslogd |
+| 6 | lpr | Log từ quá trình in |
+| 7 | news | Thông tin tin tức từ hệ thống, liên quan đến giao thức Network News Protocol |
+| 8 | uucp | Tập hợp các chương trình cấp thấp cho phép kết nối các máy tính Unix với nhau |
+| 9 | cron | Tiện ích cho phép thực hiện các tác vụ theo định kỳ |
+| 10 | authprix | Các thông báo liên quan đến truy cập và bảo mật |
+| 11 | ftp | Log của FTP deamon |
+| 12 | ntp | Hệ thống con NTP |
+| 13 | security | Kiểm tra đăng nhập |
+| 14 | console | Log cảnh báo hệ thống |
+| 15 | solaris-cron | Log lịch trình |
+| 16-23 | local0 to local7 | Log dự trữ cho sử dụng nội bộ |
+
+##### Các mức độ cảnh báo của Syslog
+- Mức độ cảnh báo được chia thành 8 mức từ 0 đến 7, với 0 là cấp độ cao nhất
+- Bảng các mức độ nghiêm trọng của Syslog
+| Value | Severity | Keyword |
+| - | - | - |
+| 0 | Emergency | ```emerg``` - Thông báo tình trạng khẩn cấp |
+| 1 | Alert | ```alert``` - Hệ thống cần can thiệp ngay |
+| 2 | Critical | ```crit``` - Tình trạng nguy kịch |
+| 3 | Error | ```err``` - Thông báo lỗi đối với hệ thống |
+| 4 | Warning | ```warning``` - Mức cảnh báo đối với hệ thống |
+| 5 | Notice | ```notice``` - Chú ý đối với hệ thống |
+| 6 | Information | ```info``` - Thông tin của hệ thống |
+| 7 | Debug | ```debug``` - Quá trình kiểm tra hệ thống |
+
+- Ví dụ với dịch vụ mail
+    - Nếu chỉ muốn lưu các log với mức cảnh báo là ```info``` trở lên (từ mức 6 đến mức 0)
+    > mail.info                     /var/log/mail
+
+    - Nếu chỉ muốn lưu các log có mức là ```info```
+    > mail.=info                    /var/log/mail
+
+    - Nếu muốn lưu tất cả các mức của dịch vụ mail
+    > mail.*                        /var/log/mail
+
+    - Nếu muốn lưu lại tất cả các mức trừ mức ```info```
+    > mail.!info                    /var/log/mail
+
+### Tổng quan về Log tập trung
+
+![image](https://camo.githubusercontent.com/91218fce169f3547691a0daf0781fd35aaacfc66/68747470733a2f2f696d6775722e636f6d2f44716366676e552e6a7067)
+
+- Log tập trung được dùng khi
+    - Có nhiều nguồn sinh log
+        - Nằm trên nhiều máy chủ khác nhau
+        - Nội dung log không đồng nhất
+        - Định dạng log không đồng nhất
+    - Đảm bảo tính toàn vẹn, bí mật và sẵn sàng của log
+        - Nhiều các rootkit được thiết kế để xoá bỏ log
+        - Do log mới được ghi đè lên log cũ, vì vậy, log cần phải được lưu trữ ở một nơi an toàn và phải có kênh truyền đủ để đảm bảo tính an toàn và sẵn sàng sử dụng để phân tích hệ thống
+
+##### Ưu điểm
+- Giúp quản trị viên có cái nhìn chi tiết và hệ thống, vì vậy cần có định hướng tốt hơn về hướng giải quyết
+- Mọi hoạt động của hệ thống được ghi lại và lưu trữ ở một nơi an toàn (log server) để đảm bảo tính toàn vẹn, phục vụ cho quá trình phân tích điều tra các cuộc tấn công vào hệ thống
+- Log tập trung kết hợp với các ứng dụng thu thập và phân tích log khác giúp cho việc phân tích log trở nên thuận tiện hơn, dô đó có thể giảm thiểu được nguồn nhân lực
+
+##### Nhược điểm
+- Có nguy cơ bị quá tải máy chủ Syslog: nếu máy chủ bị tấn công, có thể hàng ngàn log messages được gửi đến dẫn tới quá tải máy chủ log
+- Khi có sự cố với máy chủ Syslog, máy khách sẽ không thể gửi các bản log tới server, vì vậy máy khách sẽ phải lưu trữ cục bộ tới khi máy chủ khả dụng trở lại, điều này để lâu có thể dẫn tới dung lượng đĩa của máy khách nhanh đầy
+
+### Cấu hình Log tập trung trên CentOS
+##### Cấu hình Rsyslog trên Server
+- Chỉnh sửa file cấu hình Syslog có đường dẫn ```/etc/rsyslog.conf``` để cho phép nhận các bản ghi log từ các client gửi về
+```sh
+# Provides UDP syslog reception (dòng 14)
+#$ModLoad imudp
+#$UDPServerRun 514
+
+# Provides TCP syslog reception (dòng 18)
+$ModLoad imtcp
+$InputTCPServerRun 514
+```
+
+- Ở đây có thể lựa chọn sử dụng UDP hoặc TCP để cho phép server nhận các bản tin log. Mặc định syslog sử dụng port 514 để gửi và nhận thông tin log
+
+- Thiết lập cấu hình thư mục cho các bản log của cùng client, có 2 cách đặt tên
+    - Thư mục log client trả về là ip-client
+    ```sh
+    $template RemoteServer, "/var/log/%fromhost-ip%/%SYSLOGFACILITY-TEXT%.log"
+    *.* ?RemoteServer
+    ```
+
+    - Thư mục log client trả về là tên máy (hostname) của client
+    ```sh
+    $template RemoteServer, "/var/log/%HOSTNAME%/%SYSLOGFACILITY-TEXT%.log"
+    *.* ?RemoteServer
+    ```
+
+- Mở port 514 nếu đang dùng tường lửa
+```sh
+firewall-cmd --permanent --add-port=514/udp
+firewall-cmd --permanent --add-port=514/tcp
+firewall-cmd --reload
+```
+
+- Khởi động lại Rsyslog server và kiểm tra xem có đang lắng nghe trên port 514 hay không
+```sh
+systemctl restart rsyslog
+netstat -tna | grep 514
+```
+
+##### Cấu hình Rsyslog trên Client
+- Client phải truyền đúng giao thức đã cấu hình ở Rsyslog Server
+    - Đối với giao thức UDP: ```*.* @IPserver:514```
+    - Đối với giao thức TCP: ```*.* @@IPserver:514```
+
+- Thiết lập cấu hình tại file cấu hình của Rsyslog có đường dẫn ```/etc/rsyslog.conf```, cấu hình với giao thức tương ứng ở mục RULES (dòng 46)
+
+- Khởi động lại Rsyslog để thiết lập có hiệu lực
+```sh
+systemctl restart rsyslog
+```
+
+##### Kiểm tra việc thiết lập cấu hình Rsyslog trên Server
+- Sử dụng ```tcpdump``` để bắt các gói tin gửi về Server từ Client
+```sh
+tcpdump -nni ens33 port 514
+```
+
+![image](./image/Rsyslog%201.png)
+
+- Kiểm tra trong thư mục ```/var/log/``` xuất hiện thư mục có tên là địa chỉ IP của client (192.168.14.137)
+
+![image](./image/Rsyslog%203.png)
+
+- Kiểm tra trong thư mục của client xuất hiện các file log (cron, deamon, user,...)
+
+![image](./image/Rsyslog%202.png)
+
+### Cấu hình Log Apache gửi về Rsyslog Server
+- Dịch vụ ```httpd``` (Apache) có các file log nằm trong thư mục ```/var/log/httpd/``` bao gồm ```access_log``` và ```error_log```
+
+- Đầu tiên, tạo file cấu hình ```apache.conf``` tại thư mục ```/etc/rsyslog.d/``` trên máy client
+```sh
+nano /etc/rsyslog.d/apache.conf
+```
+
+- Nội dung file cấu hình
+```sh
+$ModLoad imfile                                 # Dòng này chỉ thêm một lần
+
+# Apache error file:
+$InputFileName /var/log/httpd/error_log         # Đường dẫn file log muốn đẩy
+$InputFileTag errorlog                          # Tên file
+$InputFileSeverity info                         # Các log từ mức info trở lên được ghi lại
+$InputFileFacility local3                       # Facility log
+$InputRunFileMonitor
+
+# Apache access file:
+$InputFileName /var/log/httpd/access_log
+$InputFileTag accesslog
+$InputFileSeverity info
+$InputFileFacility local4
+$InputRunFileMonitor
+
+$InputFilePollInterval 10                       # Cứ sau 10 giây lại gửi tin nhắn
+```
+
+- Khởi động lại ```rsyslog``` trên client
+```sh
+systemctl restart rsyslog
+```
+
+- Kiểm tra trên server bằng tcpdump thấy có bản ghi log ```local3.info``` và ```local4.info``` được gửi từ client
+
+![image](./image/Rsyslog%205.png)
+
+- Kiểm tra tại thư mục của client trên server, thấy xuất hiện 2 file ```local3.log``` và ```local4.log```
+
+![image](./image/Rsyslog%204.png)
+
+- ```local3.log``` tương ứng với ```error_log``` và ```local4.log``` tương ứng với ```access_log```
